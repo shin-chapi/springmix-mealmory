@@ -41,27 +41,27 @@ app.jsとapp.cssを読み込むだけで、bootstrap、Sass、jQuery、Vueとい
  [このプロジェクトをHerokuにデプロイしたサンプルページ](https://sprimgmix.herokuapp.com/)
  
  こちらのサンプルページの項目は、各々どんなツールなのかの説明や使い方の参考サイトへのリンクになっています。
+ 
+※Windowsの方は管理者用コマンドプロンプトで作業して下さい
 
- 1．上記Nodeの参考サイトで、nvmとNode(npm)をインストールして下さい。Nodeのバージョンは、v16.13.2を選んでください。
+1. 上記Nodeの参考サイトで、nvmとNode(npm)をインストールして下さい。Nodeのバージョンは、v16.13.2を選んでください。
  
-  　(Windowsの方は管理者用コマンドプロンプトで作業して下さい)
+1. cdで、eclipseのワークスペース直下に移動してください。
  
- 2．cdで、eclipseのワークスペース直下に移動してください。
+1. git clone https://github.com/MutsumiMatsuda/springmix あなたのプロジェクト名
  
- 3．git clone https://github.com/MutsumiMatsuda/springmix あなたのプロジェクト名
+1. SpringMixApplication.javaを、あなたのプロジェクトに合わせてリファクタリングして下さい。
  
- 4．SpringMixApplication.javaを、あなたのプロジェクトに合わせてリファクタリングして下さい。
+1. GitHubにリモートリポジトリを作って下さい。
  
- 5．GitHubにリモートリポジトリを作って下さい。
+1. git remote set-url origin コマンドで、あなたのリモートリポジトリをプロジェクトに設定して下さい。
  
- 6．git remote set-url origin コマンドで、あなたのリモートリポジトリをプロジェクトに設定して下さい。
+1. npm install
  
- 7．npm install
+1. npm run dev
  
- 8．npm run dev
+1. eclipseの4でリファクタリングしたjavaファイルを選択し、実行->Spring Bootアプリケーション
  
- 9. eclipseの4でリファクタリングしたjavaファイルを選択し、実行->Spring Bootアプリケーション
- 
-10．localhost:8080にブラウザでアクセスし、動作確認して下さい。
+1. localhost:8080にブラウザでアクセスし、動作確認して下さい。
 
 Enjoy your coding!
