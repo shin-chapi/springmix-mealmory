@@ -39,4 +39,4 @@ bootstrap、Sass、jQuery、Vueといった代表的なCSSやJavaScriptのフレ
  
 10．localhost:8080にブラウザでアクセスし、動作確認して下さい。
 
-Happy Programing!
+Enjoy you coding!
