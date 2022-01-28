@@ -31,7 +31,7 @@ app.jsとapp.cssを読み込むだけで、bootstrap、Sass、jQuery、Vueとい
 
 煩わしい設定は必要ありません。
 
-各ページ用に新しくscssファイルを作成する場合でも、webpack.mix.jsに一行追加するだけで、webpackのコンパイルが可能です。
+各ページ用に新しくscssファイルを作成する場合でも、webpack.mix.jsに一行追加するだけで、scss→cssのコンパイルが可能です。
 
 オリジナルアプリ開発の一助になれば幸いです。
         
