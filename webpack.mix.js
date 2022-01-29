@@ -18,7 +18,7 @@ mix
   .sass('src/main/resources/assets/sass/app.scss', 'css')
   // This one is important: you have to set the local path to the folder
   // for public accessible static resources.
-  .setPublicPath("src/main/resources/static/");
+  .setPublicPath("src/main/resources/static/")
   
   // その他の設定
   // mix.js(src, output);

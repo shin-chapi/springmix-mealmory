@@ -64,4 +64,80 @@ app.jsとapp.cssを読み込むだけで、bootstrap、Sass、jQuery、Vueとい
  
 1. localhost:8080にブラウザでアクセスし、動作確認して下さい。
 
-Enjoy your coding!
+
+### 使い方
+
+プロジェクト内で覚える必要があるのは、以下4つのフォルダとファイルだけです。
+
+![ソースツリー](./src/main/resources/static/image/tree.png "ソースツリー")
+
+#### ①node_modules
+npm install を実行すると、作成されるフォルダです。
+
+中を開けると、恐ろしい数のフォルダとファイルがありますが、決して変更や削除はしないでください。
+
+ここは、WebpackでコンパイルするcssとJavaScriptの原材料やツールが保管されている大切な場所です。
+
+ここにあるものを使って、テンプレートで読み込むcssやjsファイルを作成するわけです。
+
+ただし、Webアプリの動作時には不要なフォルダ(デプロイ不要)ですので、.gitignoreに登録してあります。
+
+#### ②src/main/resources/assets
+作成するcssやjsの内容を設定するファイルを置く場所です。
+
+私が勝手に作ったフォルダですので、各自好みに合わせて、フォルダ名や場所を変えても大丈夫です。
+
+その場合は、後述のwebpack.mix.jsを変更して下さい。
+
+このプロジェクトでは、app.scssにフォントやその他の基本設定を、app.jsではBootstrapを読み込み、Vue、Font Awesomeの準備をしています。
+
+BootstrapはjQueryを使って動作しているので、jQueryの準備は、bootstrap.jsで行っています。
+
+#### ③src/main/resources/static
+ここは、実際にアプリの動作時に読み込むcssやJavaScriptのファイルが置かれる場所です。
+
+つまり、Webpackのコンパイル結果が配置されるところ、ということです。
+
+場所やフォルダ名は変更しないようにしましょう。
+
+#### ④webpack.mix.js
+どこにあるどんなファイルを、どこにコンパイルして配置するか、を指定するlaravel-mixの設定ファイルです。
+
+元々のWebpackの設定ファイルよりも、大変使いやすく単純化されており、laravel-mix内部にwebpack.config.jsを持ち、webpack.mix.jsの単純な設定だけでWebpackが動作するように作られています。
+
+webpack.mix.jsの大まかな構造は、以下の通りです。
+
+```
+const mix = require('laravel-mix');
+
+mix
+  .sass(変換元のscssファイル, 変換先)
+  .js(変換元のjsファイル, 変換先)
+  .setPublicPath("src/main/resources/static/")
+;
+```
+
+
+最後のsetPublickPathで、コンパイル結果のファイルをどこに出力するかの場所を指定しています。
+
+何行もあるように見えますが、これは、mixというオブジェクトにドットでつなげて処理を追加しているだけで、コードは一行文しかありません。
+
+```
+mix.処理1().処理2().処理3()...処理x();
+```
+
+と、書いてあるのと同じです。
+
+
+ですから、例えば、common.scssというファイルを追加でコンパイルしたい場合は、次の一行を追加してやるだけでOKです。
+
+```
+  .sass('src/main/resources/assets/sass/common.scss', 'css')
+```
+
+
+それでは、フロントにも力を入れて、見た人がうなるような、オリジナルアプリを作ってみましょう！
+
+
+
+Enjoy your coding!!
