@@ -1,43 +1,24 @@
 <!doctype html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/common}">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/common}">
+<section layout:fragment="content">
+	<div class="col-lg-8 offset-lg-2 text-center">
+		<h1>MEALMORY</h1>
+		<h2>Record your meal</h2>
+		<p class="lead">
+			普段の食事を記録するアプリ<br />
+		</p>
+	</div>
+	<div class="d-none d-lg-block d-xl-block d-xxl-block">
+		<div class="row justify-content-center">
+			<div class="col-5">
+				<a class="btn w-100 btn-outline-light">Sign up</a>
+			</div>
+			<div class="col-5">
+				<a class="btn w-100 btn-outline-light">Log in</a>
+			</div>
+		</div>
+	</div>
 
-  <section layout:fragment="content">
-    <div class="col-lg-8 offset-lg-2 text-center">
-      <h1>MEALMORY</h1><h1>Record your meal</h1>
-      <p class="lead">
-          普段の食事を記録するアプリです。<br/>
-        
-  
-      
 
-    <div class="row">
-      <div class="col-lg-6 offset-lg-3">
-        <button class="button">リンク表示/非表示</button>　←jQueryの動作確認用ボタンです
-      </div>
-    </div>
-    <hr/>
-    <div class="row">
-      <div class="col-lg-6 offset-lg-3" id="star">
-        <star-rating v-model="rating"></star-rating>　↑Vueのコンポーネントで評価用の★を表示してみました
-      </div>
-    </div>
-    <hr/>
-    <div class="row">
-      <div class="col-lg-6 offset-lg-3">
-        <i class="fas fa-dog fa-3x"></i>
-        <i class="far fa-comments fa-3x"></i>
-        <i class="fas fa-cat fa-3x fa-flip-horizontal"></i>　←Font Awesomeのアイコンです
-      </div>
-    </div>
-    <hr/>
-  </section>
-  
-<section layout:fragment="js">
-  <script>
-  $(function() {
-    $("button").on("click", function() {
-      $("p").slideToggle();
-    });
-  });
-  </script>
 </section>
