@@ -1,8 +1,8 @@
-INSERT INTO Users
+INSERT INTO users
 (
    name,
    password,
-   email,
+   mail,
    create_datetime
 )
 VALUES
