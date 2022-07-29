@@ -11,12 +11,21 @@
 	</div>
 	<div class="d-none d-lg-block d-xl-block d-xxl-block">
 		<div class="row justify-content-center">
+		
+		　<form th:action="@{/calendar}" method="post">
+		
+			<th>メールアドレス</th>
+			<td><input type="text" name="mail" size="20" /></td>
+		
+			<th >パスワード</th>
+			<td><input type="text" name="password" size="20" /></td>
+		
 			
-			<div class="col-5">
-				<a class="btn w-100 btn-outline-light" href="/login">Log in</a>
+			<div class="col-15">
+				<a class="btn w-100 btn-outline-light" href="/calendar">Login</a>
 			</div>
 		</div>
 	</div>
 
-
+</form>
 </section>

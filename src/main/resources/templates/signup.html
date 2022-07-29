@@ -5,24 +5,37 @@
 	<div class="col-lg-8 offset-lg-2 text-center">
 		<h1>新規登録</h1>
 	</div>
-	　<form th:action="@{/signup}" method="post">
+	
+	
+	　 <form th:action="@{/signup}" th:object="${user}"
+          method="post" >
+          <div class="mb-3">
+            <label for="name" th:text=name ></label>
+            <input type="text" class="form-control"
+              th:errorclass="is-invalid" th:field="*{name}">
+            <div class="invalid-feedback" th:errors="*{name}">
+            </div>
+          </div>
 
-		<tr>
-			<th>名前</th>
-			<td><input type="text"  name="name" size="10"/></td>
-		</tr>
-		<br>
-		<tr>
-			<th>パスワード</th>
-			<td><input type="text" name="password" size="20" /></td>
-		</tr>
-		<br>
-		<tr>
-			<th>メールアドレス</th>
-			<td><input type="text" name="mail" size="20" /></td>
-		</tr>
-		
+          <div class="mb-3">
+            <label for="mail" th:text=mail ></label>
+            <input type="text" class="form-control"
+              th:errorclass="is-invalid" th:field="*{mail}">
+            <div class="invalid-feedback" th:errors="*{mail}">
+            </div>
+          </div>
 
-		<input type="submit" value="登録"/>
-	</form> 
+          <div class="mb-3">
+            <label for="password" th:text=password ></label>
+            <input class="form-control" 
+              th:errorclass="is-invalid" th:field="*{password}">
+            
+            <div class="invalid-feedback" th:errors="*{password}">
+            </div>
+          </div>
+
+          <button class="btn w-100 btn-outline-light"
+            type="submit" th:text=signup >
+          </button>
+        </form>
 </section>
