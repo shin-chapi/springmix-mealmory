@@ -5,42 +5,24 @@
 	<div class="col-lg-8 offset-lg-2 text-center">
 		<h1>新規登録</h1>
 	</div>
-	<!-- <form method="post" th:action="@{/user}" th:object="${form}">
-						<div layout:replace="~{layouts/common::messages}"></div>
-						<div class="mb-3">
-							<label class="form-label text-white" for="user_name"
-								th:text="#{users.new.name}">Name</label> <input type="text"
-								class="form-control" th:field="*{name}" />
-							<p th:if="${#fields.hasErrors('name')}" class="error-message"
-								th:errors="*{name}"></p>
-						</div>
-						<div class="mb-3">
-							<label class="form-label text-white" for="user_email"
-								th:text="#{users.new.email}">Email</label> <input type="text"
-								class="form-control" th:field="*{email}" />
-							<p th:if="${#fields.hasErrors('email')}" class="error-message"
-								th:errors="*{email}"
-								th:placeholder="#{users.new.email.placeholder}"></p>
-						</div>
-						<div class="mb-3">
-							<label class="form-label text-white" for="user_password"
-								th:text="#{users.new.password}">Password</label> <input
-								class="form-control" type="password" th:field="*{password}" />
-							<p th:if="${#fields.hasErrors('password')}" class="error-message"
-								th:errors="*{password}"></p>
-						</div>
-						<div class="mb-3">
-							<label class="form-label text-white"
-								for="user_password_confirmation"
-								th:text="#{users.new.password_confirmation}">Password
-								confirmation</label> <input type="password" class="form-control"
-								th:field="*{passwordConfirmation}"
-								th:placeholder="#{users.new.password.placeholder}" />
-							<p th:if="${#fields.hasErrors('passwordConfirmation')}"
-								class="error-message" th:errors="*{passwordConfirmation}"></p>
-						</div>
-						<input type="submit" value="登録"
-							class="btn w-100 btn-outline-light"
-							th:value="#{users.new.submit}" />
-					</form> -->
-	</section>
+	　<form th:action="@{/signup}" method="post">
+
+		<tr>
+			<th>名前</th>
+			<td><input type="text"  name="name" size="10"/></td>
+		</tr>
+		<br>
+		<tr>
+			<th>パスワード</th>
+			<td><input type="text" name="password" size="20" /></td>
+		</tr>
+		<br>
+		<tr>
+			<th>メールアドレス</th>
+			<td><input type="text" name="mail" size="20" /></td>
+		</tr>
+		
+
+		<input type="submit" value="登録"/>
+	</form> 
+</section>
