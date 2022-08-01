@@ -12,18 +12,21 @@
 	<div class="d-none d-lg-block d-xl-block d-xxl-block">
 		<div class="row justify-content-center">
 		
-		　<form th:action="@{/calendar}" th:object="${user}"  method="post">
+		　<form th:action="@{/calendar}"   method="post">
 		
 			<p>メールアドレス</p>
-			<td><input type="text" name="mail" size="20" /></td>
+			<input type="text" name="mail" size="20" />
 		
 			<p>パスワード</p>
-			<td><input type="text" name="password" size="20" /></td>
+			<input type="text" name="password" size="20" />
 		
 			
 			<div class="col-15">
-				<a class="btn w-100 btn-outline-light"    th:href="@{/calendar}">Login</a>
+				<a class="btn w-100 btn-outline-light"  th:href="@{/calendar}">Login</a>
 			</div>
+			<div class="col-15">
+				<a class="btn w-100 btn-outline-light"  th:href="@{/signup}">signup</a>
+				</div>
 			</form>
 		</div>
 	</div>
