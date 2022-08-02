@@ -22,27 +22,37 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 
-		web.ignoring().antMatchers("/css/**", "js/**", "/img/**", "/webpack.mix.js");
+		web.ignoring().antMatchers("/css/**", "js/**", "/img/**");
 	}
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers("/", "sinup", "index").permitAll()
-				.antMatchers("/css/**", "js/**", "/img/**", "/webpack.mix.js").permitAll().anyRequest().authenticated()
-				.and()
-
-				.formLogin().loginPage("/login").permitAll().loginProcessingUrl("/login")
-				.defaultSuccessUrl("/calender").and()
-
-				.logout().logoutUrl("/logout").invalidateHttpSession(true).deleteCookies("JSESSIONID");
+		http.authorizeRequests()
+			.antMatchers("/","/login","/signup","/logout").permitAll()
+	
+		
+			.antMatchers("/css/**", "js/**", "/img/**", "/resources/**","/webjars/**").permitAll()
+			.anyRequest().authenticated()
+			.and()
+//
+			.formLogin().loginPage("/login").permitAll()
+			.loginProcessingUrl("/login")
+			.usernameParameter("name")
+            .passwordParameter("password")
+			.defaultSuccessUrl("/calendar")
+			.failureUrl("/login")
+			.and()
+//
+			.logout().logoutUrl("/logout").invalidateHttpSession(true).deleteCookies("JSESSIONID");
 	}
 
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder().encode("password"))
-				.authorities("ROLE_ADMIN").and().withUser("user").password(passwordEncoder().encode("password"))
-				.authorities("ROLE_USRE");
+		auth.inMemoryAuthentication()
+		    .withUser("name")
+		    .password("password")
+		    .roles("ADMIN");	
 	}
 
 //    @Bean

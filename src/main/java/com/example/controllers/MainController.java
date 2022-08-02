@@ -9,16 +9,13 @@ public class MainController {
 
     @RequestMapping("/")
     public String index() {
-        return "login";
+        return "index";
     }
     
     @RequestMapping("login")
     public String login() {
-    	return "calendar";
+    	return "login";
     }
-    @RequestMapping("index")
-    public String homeIndex() {
-        return "index";
-    }
+    
 }
     

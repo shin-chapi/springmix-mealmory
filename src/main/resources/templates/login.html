@@ -14,11 +14,11 @@
 		
 		　<form th:action="@{/calendar}"   method="post">
 		
-			<p>メールアドレス</p>
-			<input type="text" name="mail" size="20" />
+			<p>ユーザーID</p>
+			<input type="text" name="name" th:value="*{name}" required="required" size="20" />
 		
 			<p>パスワード</p>
-			<input type="text" name="password" size="20" />
+			<input type="password" name="password" th:value="*{password}" required="required" size="20" />
 		
 			
 			<div class="col-15">
