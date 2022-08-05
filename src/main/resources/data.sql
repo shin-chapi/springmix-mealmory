@@ -7,8 +7,20 @@ INSERT INTO users
 )
 VALUES
 (
-   'サーモン',
+   'user',
    'password',
    'email@co.com',
+   LOCALTIME ()
+),
+(
+   'name',
+   'password',
+   'sample@co.jp',
+   LOCALTIME ()
+),
+(
+   'salmon',
+   'password',
+   'salmon@co.com',
    LOCALTIME ()
 );

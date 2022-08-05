@@ -7,19 +7,19 @@
 	</div>
 	
 	
-	　 <form th:action="@{/calendar}" th:object="${user}"
+	　 <form th:action="@{/signup}" th:object="${signupForm}"
           method="post" >
           <div class="mb-3">
-            <label for="name" th:text=name ></label>
-            <input type="text" class="form-control" name="name"
-              th:errorclass="is-invalid" th:field="*{name}">
-            <div class="invalid-feedback" th:errors="*{name}">
+            <label for="userId" th:text=userId ></label>
+            <input type="text" class="form-control" 
+              th:errorclass="is-invalid" th:field="*{userId}">
+            <div class="invalid-feedback" th:errors="*{userId}">
             </div>
           </div>
 
           <div class="mb-3">
             <label for="mail" th:text=mail ></label>
-            <input type="text" class="form-control" name="mail"
+            <input type="text" class="form-control" 
               th:errorclass="is-invalid" th:field="*{mail}">
             <div class="invalid-feedback" th:errors="*{mail}">
             </div>
@@ -27,7 +27,7 @@
 
           <div class="mb-3">
             <label for="password" th:text=password ></label>
-            <input class="form-control"  name="passwoerd"
+            <input class="form-control"  
               th:errorclass="is-invalid" th:field="*{password}">
             
             <div class="invalid-feedback" th:errors="*{password}">

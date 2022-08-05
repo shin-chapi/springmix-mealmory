@@ -1,0 +1,28 @@
+package com.example.form;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Length;
+
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
+import lombok.Data;
+
+@Data
+public class SignupForm {
+	
+	@NotBlank
+	@Length(max=255)
+	private String userId;
+	
+	@NotBlank
+	@Email
+	private String mail;
+	
+	@NotNull
+	@Length(max=255)
+	@Pattern(regexp = "^[a-zA-Z0-9]+$",message="パスワードは英数字の大文字と小文字、記号だけが使えます")
+	private String password;
+	
+}
