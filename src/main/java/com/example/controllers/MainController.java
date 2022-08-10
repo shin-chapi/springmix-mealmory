@@ -14,11 +14,7 @@ public class MainController {
         return "index";
     }
     
-    @RequestMapping("login")
-    public String login() {
-    	System.out.println("login");
-    	return "login";
-    }
+   
     
     
     

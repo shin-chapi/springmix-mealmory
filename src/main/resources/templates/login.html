@@ -5,20 +5,22 @@
 	<div class="col-lg-8 offset-lg-2 text-center">
 		<h1>MEALMORY</h1>
 		<h2>Record your meal</h2>
+		
 		<p class="lead">
 			普段の食事を記録するアプリ<br />
 		</p>
+		
 	</div>
 	<div class="d-none d-lg-block d-xl-block d-xxl-block">
 		<div class="row justify-content-center">
 		
-		　<form th:action="@{/calendar}" method="post">
+		　<form th:action="@{/login}" method="post">
 		
 			<label for="userId">ユーザーID</label>
-			<input type="text" name="userId" th:value="*{username}" placeholder="ユーザーID" size="20"  />
+			<input type="text" name="user" placeholder="ユーザーID" size="20"  />
 		
 			<label for="password">パスワード</label>
-			<input type="password" name="password" th:value="*{password}" placeholder="パスワード" size="20" />
+			<input type="password" name="password"  placeholder="パスワード" size="20" />
 		
 			
 			<div class="col-15">

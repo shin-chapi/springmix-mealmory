@@ -1,27 +1,20 @@
-//package com.example.service;
-//
-//import java.util.List;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Service;
-//
-//import com.example.model.User;
-//import com.example.repository.UserRepository;
-//
-//
-//@Service
-//public class UserService {
-//
-//	 /**
-//	   * ユーザー情報 Repository
-//	   */
-//	  @Autowired
-//	  private UserRepository userRepository;
-//	  /**
-//	   * ユーザー情報 全検索
-//	   * @return 検索結果
-//	   */
-//	  public List<User> searchAll() {
-//	    return userRepository.findAll();
-//	  }
-//}
+package com.example.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+import com.example.persistence.UserListMapper;
+
+@Service
+public class UserService implements UserDetailsService{
+    @Autowired
+    private UserListMapper userListMapper;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userListMapper.certificate(username);
+    }
+}

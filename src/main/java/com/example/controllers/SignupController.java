@@ -15,11 +15,15 @@ import com.example.form.SignupForm;
 @Controller
 public class SignupController {
 	
+	/** ユーザー登録画面を表示 */
 	@GetMapping("signup")
 	public String signup(@ModelAttribute SignupForm form) {
+		// ユーザー登録画面に遷移
 		return "signup";
 	}
 	
+	
+	/** ユーザー登録処理 */
 	@PostMapping("signup")
 	public String postsignup(@ModelAttribute  @Validated SignupForm form ,BindingResult bindingResult) {
 		// 入力チェック結果
@@ -27,8 +31,12 @@ public class SignupController {
 					// NG:ユーザー登録画面に戻ります
 					return signup(form);
 				}
+				
+				//ログ表示
 		Logger logger = LoggerFactory.getLogger(SignupController.class);
 		logger.info(form.toString());
+		
+		// ログイン画面にリダイレクト
 		return "redirect:/login";
 		
 		
