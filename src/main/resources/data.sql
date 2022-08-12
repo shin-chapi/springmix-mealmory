@@ -1,26 +1,17 @@
-INSERT INTO users
+INSERT INTO user
 (
-   name,
+   username,
    password,
-   mail,
-   create_datetime
+   mail
+   
 )
 VALUES
 (
    'user',
    'password',
-   'email@co.com',
-   LOCALTIME ()
-),
-(
-   'name',
-   'password',
-   'sample@co.jp',
-   LOCALTIME ()
-),
-(
-   'salmon',
-   'password',
-   'salmon@co.com',
-   LOCALTIME ()
+   'email@co.com'
+   
 );
+
+
+
