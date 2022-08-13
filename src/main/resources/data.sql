@@ -8,7 +8,7 @@ INSERT INTO user
 VALUES
 (
    'user',
-   'password',
+   '$2a$08$/riSRL40/oHJBmFr6ZNKo.CdoGMIAhbbdyY2Sk/bVS4FFv71CkcIq',
    'email@co.com'
    
 );
