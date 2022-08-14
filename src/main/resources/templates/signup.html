@@ -10,17 +10,17 @@
 	　 <form th:action="@{/signup}" th:object="${signupForm}"
           method="post" >
           <div class="mb-3">
-            <label for="userId" th:text=userId ></label>
+            <label for="username" th:text=username ></label>
             <input type="text" class="form-control" 
-              th:errorclass="is-invalid" th:field="*{userId}">
-            <div class="invalid-feedback" th:errors="*{userId}">
+              th:errorclass="is-invalid" th:field="*{username}" name="username" >
+            <div class="invalid-feedback" th:errors="*{username}">
             </div>
           </div>
 
           <div class="mb-3">
             <label for="mail" th:text=mail ></label>
-            <input type="text" class="form-control" 
-              th:errorclass="is-invalid" th:field="*{mail}">
+            <input type="email" class="form-control" 
+              th:errorclass="is-invalid" th:field="*{mail}" name="mail" >
             <div class="invalid-feedback" th:errors="*{mail}">
             </div>
           </div>
@@ -28,7 +28,7 @@
           <div class="mb-3">
             <label for="password" th:text=password ></label>
             <input class="form-control"  
-              th:errorclass="is-invalid" th:field="*{password}">
+              th:errorclass="is-invalid" th:field="*{password}" name="password" >
             
             <div class="invalid-feedback" th:errors="*{password}">
             </div>

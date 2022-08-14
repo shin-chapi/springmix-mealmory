@@ -2,15 +2,11 @@ package com.example.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class LoginController {
 	
-//	@PostMapping("/login")
-//    public String login(Model model) {
-//		System.out.println("calendar");
-//		return "calendar";
+
 		
 	
 	
@@ -19,11 +15,16 @@ public class LoginController {
 	    	System.out.println("login");
 	    	return "login";
 	    }
-	@RequestMapping("/logout")
+	@GetMapping("/logout")
     public String logout() {
 		System.out.println("logout");
 		return "logout";
 		
+	}
+	
+	@GetMapping("/calendar")
+	public String calendar() {
+		return "calendar";
 	}
 
 }

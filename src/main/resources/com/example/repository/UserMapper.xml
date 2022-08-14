@@ -5,23 +5,43 @@
 
 <mapper namespace="com.example.repository.UserMapper">
 
-	<select id="identifyUser" parameterType="java.lang.String" resultMap="userDetails">
+	<select id="identifyUser" parameterType="java.lang.String"
+		resultMap="userDetails">
 
 		SELECT id,
-               username,
-               password,
-               mail,
-            
-        FROM   user
+		username,
+		password,
+		mail,
+
+		FROM user
 	</select>
-	
+
 	<resultMap type="com.example.model.User" id="userDetails">
-            <result property = "id" column = "id" />
-            <result property = "username" column = "username" />
-            <result property = "password" column = "password" />
-            <result property = "mail" column = "mail" />
-           
-           
-        </resultMap>
+		<result property="id" column="id" />
+		<result property="username" column="username" />
+		<result property="password" column="password" />
+		<result property="mail" column="mail" />
+
+
+	</resultMap>
+
+
+	<insert id="registerUser">
+		INSERT INTO user
+		(
+		username,
+		password,
+		mail
+
+		)
+		VALUES
+		(
+		#{username}
+		,#{password}
+		,#{mail}
+
+		)
+
+	</insert>
 
 </mapper>

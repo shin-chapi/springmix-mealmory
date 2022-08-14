@@ -9,54 +9,70 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.example.service.UserDetailsServiceImpl;
-
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
+	
 	@Autowired
-	private UserDetailsServiceImpl  userDetailsServiceImp;
-	
-	
+	private UserDetailsServiceImpl userDetailsServiceImp;
+
 	@Override
-	public void configure(WebSecurity web) throws Exception{
-		web.ignoring()
-			.antMatchers("/h2-console/**");
-		
+	public void configure(WebSecurity web) throws Exception {
+		/**
+		 * 静的リソースへのアクセスには、セキュリティを適用しない
+		 */
+		web.ignoring().antMatchers("/h2-console/**").antMatchers("/images/**", "/css/**", "/js/**","/webjar/**");
+
 	}
-	
-	
-	
-	 @Override
-	    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-	       auth.userDetailsService(userDetailsServiceImp).passwordEncoder(passwordEncoder());
-	        
-	    }
+	/**
+	 * ユーザーの認証方式
+	 */
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsServiceImp).passwordEncoder(passwordEncoder());
 
-  
+	}
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+
+		// @formatter:off
         //アクセスポリシーの設定
         http.authorizeRequests()
-            //指定したパターンごとに制限をかける
-            .anyRequest().authenticated()
-        	.and()
-            .formLogin();
-            
-           
-            //上記以外は制限あり
-       
-    }
-    /**
-     * パスワードをBCryptでハッシュ化するクラス
-     * ハッシュ化するクラスも幾つか種類がある
-     * @return パスワードをBCryptで暗号化するクラスオブジェクト
-     */
-    @Bean
-    PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
+            .antMatchers("/login","/signup").permitAll()
+            .anyRequest().authenticated();
+        	
+        //ログイン設定
+        http.formLogin()
+            .loginPage("/login")
+            .loginProcessingUrl("/calendar")
+            .usernameParameter("username") 
+            .passwordParameter("password")
+            .defaultSuccessUrl("/calendar")
+            .failureUrl("/login?error")
+        .and()
+            .logout()
+        	.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+            .logoutUrl("/logout")
+        	.logoutSuccessUrl("/login")
+        	.deleteCookies("JSESSIONID")
+        	.invalidateHttpSession(true);
+        	
+        // @formatter:on
+
+	}
+
+	/**
+	 * パスワードをBCryptでハッシュ化するクラス ハッシュ化するクラスも幾つか種類がある
+	 * 
+	 * @return パスワードをBCryptで暗号化するクラスオブジェクト
+	 */
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 }

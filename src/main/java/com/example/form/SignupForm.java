@@ -14,7 +14,7 @@ public class SignupForm {
 	
 	@NotBlank
 	@Length(max=255)
-	private String userId;
+	private String username;
 	
 	@NotBlank
 	@Email

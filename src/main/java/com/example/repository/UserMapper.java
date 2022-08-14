@@ -8,4 +8,6 @@ import com.example.model.User;
 public interface UserMapper {
  
 	public User identifyUser(String name);
+	
+	public void registerUser(User user);
 }
