@@ -25,11 +25,10 @@ public class SignupController {
 	public UserMapper userMapper;
 	
 	@Autowired
-	public UserRegisterationService userRegisterationService;
+	public UserRegisterationService UserRegisterationService;
 	
-//	@Autowired
-//	User user;
-	
+	//@Autowired
+	public BCryptPasswordEncoder encoder;
 	
 	/** ユーザー登録画面を表示 */
 	@GetMapping("signup")
@@ -43,7 +42,7 @@ public class SignupController {
 	
 	/** ユーザー登録処理 */
 	@PostMapping("signup")
-	public String postsignup(@ModelAttribute  @Validated SignupForm form ,User user ,BindingResult bindingResult) {
+	public String postsignup(@ModelAttribute  @Validated SignupForm form,User user ,BindingResult bindingResult) {
 		// 入力チェック結果
 				if (bindingResult.hasErrors()) { 
 					// NG:ユーザー登録画面に戻ります
@@ -54,13 +53,15 @@ public class SignupController {
 		Logger logger = LoggerFactory.getLogger(SignupController.class);
 		logger.info(form.toString());
 		
+		
 		ClassPathXmlApplicationContext context = 
 				new ClassPathXmlApplicationContext("applicationContext.xml");
-		BCryptPasswordEncoder encoder  = context.getBean(BCryptPasswordEncoder.class);
-		
+		BCryptPasswordEncoder encoder = context.getBean(BCryptPasswordEncoder.class);
+		;
 		
 		String rawPassword = user.getPassword();
 		user.setPassword(encoder.encode(rawPassword));
+		
 		
 		userMapper.registerUser(user);
 		context.close();
