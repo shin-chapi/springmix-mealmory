@@ -53,7 +53,7 @@ public class SignupController {
 		Logger logger = LoggerFactory.getLogger(SignupController.class);
 		logger.info(form.toString());
 		
-		
+		//DIコンテナ勉強用
 		ClassPathXmlApplicationContext context = 
 				new ClassPathXmlApplicationContext("applicationContext.xml");
 		BCryptPasswordEncoder encoder = context.getBean(BCryptPasswordEncoder.class);
