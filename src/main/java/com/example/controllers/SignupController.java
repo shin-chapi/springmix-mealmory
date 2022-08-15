@@ -40,9 +40,11 @@ public class SignupController {
 	}
 	
 	
-	/** ユーザー登録処理 */
+	/** ユーザー登録処理 */ 
 	@PostMapping("signup")
-	public String postsignup(@ModelAttribute  @Validated SignupForm form,User user ,BindingResult bindingResult) {
+
+	public String postsignup(@ModelAttribute  @Validated SignupForm form,BindingResult bindingResult, User user) {
+
 		// 入力チェック結果
 				if (bindingResult.hasErrors()) { 
 					// NG:ユーザー登録画面に戻ります
