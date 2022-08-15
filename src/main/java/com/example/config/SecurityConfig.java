@@ -63,9 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         	.invalidateHttpSession(true);
         	
         // @formatter:on
-
 	}
-
 	/**
 	 * パスワードをBCryptでハッシュ化するクラス ハッシュ化するクラスも幾つか種類がある
 	 * 
