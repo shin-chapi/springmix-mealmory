@@ -60,10 +60,9 @@ body {
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.6;
-  color:#FFFFE0;
+  color:#24241F;
   text-align: left;
-  background-image: url(background/pic-3.jpg);
-  background-size: cover;
+  
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {

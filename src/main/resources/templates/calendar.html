@@ -1,18 +1,25 @@
 <!doctype html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layouts/common}" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+</head>
+
 <section layout:fragment="content">
 	<div class="col-lg-8 offset-lg-2 text-center">
 		<h1>Calender</h1>
 	</div>
 	<div>
-   Welcome
-   <form role="form" id="logout" th:action="@{/logout}" method="post">
-    <button type="submit">ログアウト</button>
-  
- </form>
-   </div>
-	</section>
-	
-	
+		Welcome
+		<form role="form" id="logout" th:action="@{/logout}" method="post">
+			<button type="submit">ログアウト</button>
+
+		</form>
+	</div>
+	<div id='calendar'></div>
+</section>
+
 </html>
+
+
+

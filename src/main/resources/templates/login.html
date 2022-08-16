@@ -21,10 +21,13 @@
 		
 			<label for="password">パスワード</label>
 			<input type="password" name="password"  placeholder="パスワード" size="20" />
-		
+			
+			<p th:if="${session['SPRING_SECURITY_LAST_EXCEPTION']} != null"
+				th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"
+				class="text-danger"></p>
 			
 			<div class="col-15">
-				<input type="submit" class="btn w-100 btn-outline-light" value=Login>
+				<input type="submit" class="btn w-100 btn-outline-dark" value=Login>
 			</div>
 			
 			</form>
