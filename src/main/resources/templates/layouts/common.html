@@ -7,27 +7,7 @@
 
     <link rel="stylesheet" href="css/app.css">
    <script src="js/app.js" th:src="@{/js/app.js}"  type="application/javascript" defer></script> 
-	<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.2/main.min.css' rel='stylesheet' />
-  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.2/main.min.js'></script>
-	<script>
 
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-        	headerToolbar: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'dayGridMonth' 
-            },
-            navLinks: true,
-            businessHours: true,
-            editable: true,
-            locale: 'ja',
-        });
-        calendar.render();
-      });
-
-    </script>
   
 
 
@@ -36,7 +16,8 @@
     
   </head>
   <body>
-    <div id="app">
+  
+    <header id="app">
       <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" >Mealmory</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,8 +48,8 @@
           </section>
         </div>
 
-      </main><!-- /.container -->
-    </div>
+      </main>
+    </header>
     
     <section layout:fragment="js">
     </section>
