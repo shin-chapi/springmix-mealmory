@@ -4,8 +4,6 @@ package com.example.controllers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -53,17 +51,10 @@ public class SignupController {
 				//ログ表示
 		Logger logger = LoggerFactory.getLogger(SignupController.class);
 		logger.info(form.toString());
+
 		
-		ClassPathXmlApplicationContext context = 
-				new ClassPathXmlApplicationContext("applicationContext.xml");
-		BCryptPasswordEncoder encoder  = context.getBean(BCryptPasswordEncoder.class);
-		
-		
-		String rawPassword = user.getPassword();
-		user.setPassword(encoder.encode(rawPassword));
-		
-		userMapper.registerUser(user);
-		context.close();
+		userRegisterationService.registerUser(user);
+
 		
 		// ログイン画面にリダイレクト
 		return "redirect:/login";
