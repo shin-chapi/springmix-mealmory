@@ -1,6 +1,5 @@
 package com.example.controllers;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,48 +17,40 @@ import com.example.service.UserRegisterationService;
 
 @Controller
 public class SignupController {
-	
+
 	@Autowired
 	public UserMapper userMapper;
-	
+
 	@Autowired
 	public UserRegisterationService userRegisterationService;
+
 	
-//	@Autowired
-//	User user;
-	
-	
+
 	/** ユーザー登録画面を表示 */
 	@GetMapping("signup")
 	public String signup(@ModelAttribute SignupForm form) {
-		
-		
+
 		// ユーザー登録画面に遷移
 		return "signup";
 	}
-	
-	
+
 	/** ユーザー登録処理 */
 	@PostMapping("signup")
-	public String postsignup(@ModelAttribute  @Validated SignupForm form  ,BindingResult bindingResult, User user) {
+	public String postsignup(@ModelAttribute @Validated SignupForm form, BindingResult bindingResult, User user) {
 		// 入力チェック結果
-				if (bindingResult.hasErrors()) { 
-					// NG:ユーザー登録画面に戻ります
-					return signup(form);
-				}
-				
-				//ログ表示
+		if (bindingResult.hasErrors()) {
+			// NG:ユーザー登録画面に戻ります
+			return signup(form);
+		}
+
+		// ログ表示
 		Logger logger = LoggerFactory.getLogger(SignupController.class);
 		logger.info(form.toString());
 
-		
 		userRegisterationService.registerUser(user);
 
-		
 		// ログイン画面にリダイレクト
 		return "redirect:/login";
-		
-		
+
 	}
 }
-
