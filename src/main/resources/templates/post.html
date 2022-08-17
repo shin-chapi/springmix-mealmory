@@ -11,7 +11,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
 </head>
 <body>
-<section layout:fragment="content">
+
 <h2>食事記録登録</h2>
 <div class="container">
     <form class="form-height" id="category" th:action="@{/create}" method="post" enctype="multipart/form-data">
@@ -75,10 +75,10 @@
 	    </div>
     </div>
 	</form>
-	<a th:href="@{/index}">カレンダーへ戻る</a><br><br>
+	<a th:href="@{/calendar}">カレンダーへ戻る</a><br><br>
 </div>
 
-<script th:src="@{/js/createDiaryRecord.js}"></script>
-</section>
+
+
 </body>
 </html>
