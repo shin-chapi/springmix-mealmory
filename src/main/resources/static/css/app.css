@@ -1,5 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
-
+@charset "UTF-8";
 /*!
  * Bootstrap v4.6.1 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -60,9 +60,9 @@ body {
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.6;
-  color:#24241F;
+  color: #212529;
   text-align: left;
-  
+  background-color: #f5f8fa;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -76,7 +76,7 @@ hr {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin-top: 20;
+  margin-top: 0;
   margin-bottom: 0.5rem;
 }
 

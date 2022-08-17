@@ -7,15 +7,15 @@
 	
   
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
-		  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		>
     <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
 </head>
 <body>
-
+<section layout:fragment="content">
 <h2>食事記録登録</h2>
 <div class="container">
     <form class="form-height" id="category" th:action="@{/create}" method="post" enctype="multipart/form-data">
-    <div class="col-sm-6" th:object="${diaryRecordForm}">
+    <div class="col-sm-6" >
 	    <div class="row card forms">
 	        <div class="form-group">
 	        	<label for="cateogryId">カテゴリ</label> 
@@ -23,50 +23,50 @@
 			    	<option th:each="list:${lists}" 
 			                th:value="${list.categoryId}" th:text="${list.categoryName}"></option>
 			    </select>
-			    <div th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}" th:errorclass="error-messages"></div>
+			   <!--  <div th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}" th:errorclass="error-messages"></div> -->
 			</div>
 			<div class="form-group">
 			    <label for="diaryDay">日付</label>
 			    <input class="form-control" type="date" id="diaryDay" name="diaryDay" 
 			           th:value="*{diaryDay}">
-			    <div th:if="${#fields.hasErrors('diaryDay')}" th:errors="*{diaryDay}" th:errorclass="error-messages"></div>
+			   <!--  <div th:if="${#fields.hasErrors('diaryDay')}" th:errors="*{diaryDay}" th:errorclass="error-messages"></div> -->
 			</div>
 			<div class="form-group">
 			    <label for="record1">
 			        <span >主食</span>
 			        
 			    </label> 
-			    <input class="form-control" type="text" id="record1" name="record1" th:field="*{record1}">
-			    <div th:if="${#fields.hasErrors('record1')}" th:errors="*{record1}" th:errorclass="error-messages"></div>
+			    <input class="form-control" type="text" id="record1" name="record1" >
+			    <!-- <div th:if="${#fields.hasErrors('record1')}" th:errors="*{record1}" th:errorclass="error-messages"></div> -->
 			</div>
 			<div class="form-group">
 			    <label for="record2">
 			        <span>主菜</span>
 			        
 			    </label> 
-			    <input class="form-control" type="text" id="record2" name="record2" th:field="*{record2}">
-			    <div th:if="${#fields.hasErrors('record2')}" th:errors="*{record2}" th:errorclass="error-messages"></div>
+			    <input class="form-control" type="text" id="record2" name="record2" >
+			   
 			</div>
 			<div class="form-group">
 			    <label for="record3">
 			        <span >副菜</span>
 			        
 			    </label> 
-			    <input class="form-control" type="text" id="record3" name="record3" th:field="*{record3}">
-			    <div th:if="${#fields.hasErrors('record3')}" th:errors="*{record3}" th:errorclass="error-messages"></div>
+			    <input class="form-control" type="text" id="record3" name="record3" >
+			   <!--  <div th:if="${#fields.hasErrors('record3')}" th:errors="*{record3}" th:errorclass="error-messages"></div> -->
 			</div>
 			<div class="form-group">
 			    <label for="price">メモ</label> 
-			    <textarea class="form-control" id="memo" name="memo" th:field="*{memo}" 
+			    <textarea class="form-control" id="memo" name="memo"  
 			              placeholder="1~100文字以内でメモを記入してください"></textarea>
-			    <div th:if="${#fields.hasErrors('memo')}" th:errors="*{memo}" th:errorclass="error-messages"></div>
+			 <!--    <div th:if="${#fields.hasErrors('memo')}" th:errors="*{memo}" th:errorclass="error-messages"></div> -->
 			</div>
 			<div>
-			    <input type="hidden" id="createAt" name="createAt" th:field="*{createAt}">
+			    <input type="hidden" id="createAt" name="createAt" >
 			</div>
 			<div th:object="${fileUploadForm}">
-		        <input type="file" th:field="*{multipartFile}">
-		        <div th:if="${#fields.hasErrors('multipartFile')}" th:errors="*{multipartFile}" th:errorclass="error-messages"></div>
+		        <input type="file" >
+		       <!--  <div th:if="${#fields.hasErrors('multipartFile')}" th:errors="*{multipartFile}" th:errorclass="error-messages"></div> -->
 		        <p class="error-messages" th:text="${message}"></p>
 		    </div>
 			<div class="form-button">
@@ -79,6 +79,6 @@
 </div>
 
 <script th:src="@{/js/createDiaryRecord.js}"></script>
-<div th:replace="flagment/footer :: common-footer"></div>
+</section>
 </body>
 </html>
