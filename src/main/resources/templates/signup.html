@@ -23,9 +23,9 @@
             <label for="mail" th:text=mail ></label>
             <input type="email" class="form-control" 
               th:errorclass="is-invalid" th:field="*{mail}" name="mail" >
-            <div class="invalid-feedback" th:errors="*{mail}">
+            <div th:if="${#fields.hasErrors('mail')}" class="invalid-feedback" th:errors="*{mail}"> </div>
             </div>
-          </div>
+         
 
           <div class="mb-3">
             <label for="password" th:text=password ></label>

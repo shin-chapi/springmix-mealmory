@@ -48,6 +48,12 @@ public class SignupController {
             bindingResult.addError(fieldError);
             return "signup";
         }
+		
+		if (userMapper.identifyMail(mail) != null) {
+            FieldError fieldError = new FieldError(bindingResult.getObjectName(), "name", "そのEメールはすでに使用されています。");
+            bindingResult.addError(fieldError);
+            return "signup";
+        }
 		// 入力チェック結果
 		if (bindingResult.hasErrors()) {
 			// NG:ユーザー登録画面に戻ります

@@ -9,5 +9,7 @@ public interface UserMapper {
  
 	public User identifyUser(String name);
 	
+	public User identifyMail(String mail);
+	
 	public void registerUser(User user);
 }

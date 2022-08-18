@@ -1,84 +1,74 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>食事記録登録 </title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
-	
-  
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
-		>
-    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/common}">
 
-<h2>食事記録登録</h2>
-<div class="container">
-    <form class="form-height" id="category" th:action="@{/create}" method="post" enctype="multipart/form-data">
-    <div class="col-sm-6" >
-	    <div class="row card forms">
-	        <div class="form-group">
-	        	<label for="cateogryId">カテゴリ</label> 
-			    <select class="form-control" id="categoryId" name="categoryId" >
-			    	<option th:each="list:${lists}" 
-			                th:value="${list.categoryId}" th:text="${list.categoryName}"></option>
-			    </select>
-			   <!--  <div th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}" th:errorclass="error-messages"></div> -->
+
+<section layout:fragment="content">
+
+	<h2>食事記録登録</h2>
+
+	<div class="container">
+		<form class="form-height" id="category" th:action="@{/create}"
+			method="post" enctype="multipart/form-data">
+			<div class="col-sm-6">
+				<div class="row card forms">
+					<div class="form-group">
+						<label for="cateogryId">カテゴリ</label> 
+						<select class="form-control" id="categoryId" name="categoryId">
+							<option th:each="list:${lists}" th:value="${list.categoryId}"
+								th:text="${list.categoryName}"></option>
+						</select>
+
+					</div>
+					<div class="form-group">
+						<label for="diaryDay">日付</label> <input class="form-control"
+							type="date" id="diaryDay" name="diaryDay" th:value="*{diaryDay}">
+					</div>
+					<div class="form-group">
+						<label for="record1"> <span>主食</span>
+
+						</label> <input class="form-control" type="text" id="record1"
+							name="record1">
+
+					</div>
+					<div class="form-group">
+						<label for="record2"> <span>主菜</span>
+
+						</label> <input class="form-control" type="text" id="record2"
+							name="record2">
+
+					</div>
+					<div class="form-group">
+						<label for="record3"> <span>副菜</span>
+
+						</label> <input class="form-control" type="text" id="record3"
+							name="record3">
+
+					</div>
+					<div class="form-group">
+						<label for="price">メモ</label>
+						<textarea class="form-control" id="memo" name="memo"
+							placeholder="1~100文字以内でメモを記入してください"></textarea>
+
+					</div>
+					<div>
+						<input type="hidden" id="createAt" name="createAt">
+					</div>
+					<div th:object="${fileUploadForm}">
+						<input type="file">
+
+						<p class="error-messages" th:text="${message}"></p>
+					</div>
+					<div class="form-button">
+						<button class="btn btn-green" type="submit">登録する</button>
+					</div>
+				</div>
 			</div>
-			<div class="form-group">
-			    <label for="diaryDay">日付</label>
-			    <input class="form-control" type="date" id="diaryDay" name="diaryDay" 
-			           th:value="*{diaryDay}">
-			   <!--  <div th:if="${#fields.hasErrors('diaryDay')}" th:errors="*{diaryDay}" th:errorclass="error-messages"></div> -->
-			</div>
-			<div class="form-group">
-			    <label for="record1">
-			        <span >主食</span>
-			        
-			    </label> 
-			    <input class="form-control" type="text" id="record1" name="record1" >
-			    <!-- <div th:if="${#fields.hasErrors('record1')}" th:errors="*{record1}" th:errorclass="error-messages"></div> -->
-			</div>
-			<div class="form-group">
-			    <label for="record2">
-			        <span>主菜</span>
-			        
-			    </label> 
-			    <input class="form-control" type="text" id="record2" name="record2" >
-			   
-			</div>
-			<div class="form-group">
-			    <label for="record3">
-			        <span >副菜</span>
-			        
-			    </label> 
-			    <input class="form-control" type="text" id="record3" name="record3" >
-			   <!--  <div th:if="${#fields.hasErrors('record3')}" th:errors="*{record3}" th:errorclass="error-messages"></div> -->
-			</div>
-			<div class="form-group">
-			    <label for="price">メモ</label> 
-			    <textarea class="form-control" id="memo" name="memo"  
-			              placeholder="1~100文字以内でメモを記入してください"></textarea>
-			 <!--    <div th:if="${#fields.hasErrors('memo')}" th:errors="*{memo}" th:errorclass="error-messages"></div> -->
-			</div>
-			<div>
-			    <input type="hidden" id="createAt" name="createAt" >
-			</div>
-			<div th:object="${fileUploadForm}">
-		        <input type="file" >
-		       <!--  <div th:if="${#fields.hasErrors('multipartFile')}" th:errors="*{multipartFile}" th:errorclass="error-messages"></div> -->
-		        <p class="error-messages" th:text="${message}"></p>
-		    </div>
-			<div class="form-button">
-			    <button class="btn btn-green" type="submit">登録する</button>
-			</div>
-	    </div>
-    </div>
-	</form>
-	<a th:href="@{/calendar}">カレンダーへ戻る</a><br><br>
-</div>
+		</form>
+		<a th:href="@{/calendar}">カレンダーへ戻る</a><br> <br>
+	</div>
 
 
 
-</body>
-</html>
+</section>
