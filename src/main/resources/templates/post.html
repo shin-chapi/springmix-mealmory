@@ -14,10 +14,12 @@
 			<div class="col-sm-6">
 				<div class="row card forms">
 					<div class="form-group">
-						<label for="cateogryId">カテゴリ</label> 
-						<select class="form-control" id="categoryId" name="categoryId">
-							<option th:each="list:${lists}" th:value="${list.categoryId}"
-								th:text="${list.categoryName}"></option>
+						<label for="cateogryId">カテゴリ</label> <select class="form-control"
+							id="categoryId" name="categoryId">
+							<option value="">--Please choose an option--</option>
+							<option value="god">朝飯</option>
+							<option value="cat">昼食</option>
+							<option value="cat">晩飯</option>
 						</select>
 
 					</div>
