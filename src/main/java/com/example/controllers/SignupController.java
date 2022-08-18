@@ -43,9 +43,10 @@ public class SignupController {
 		String name = form.getName();
 		String password = form.getPassword();
 		
-		if (userMapper.identifyUser(mail) != null) {
-            FieldError fieldError = new FieldError(bindingResult.getObjectName(), "email", "その E メールはすでに使用されています。");
+		if (userMapper.identifyUser(name) != null) {
+            FieldError fieldError = new FieldError(bindingResult.getObjectName(), "name", "その名前はすでに使用されています。");
             bindingResult.addError(fieldError);
+            return "signup";
         }
 		// 入力チェック結果
 		if (bindingResult.hasErrors()) {
