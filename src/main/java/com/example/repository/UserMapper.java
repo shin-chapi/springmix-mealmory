@@ -7,7 +7,7 @@ import com.example.model.User;
 @Mapper
 public interface UserMapper {
  
-	public User identifyUser(String username);
+	public User identifyUser(String name);
 	
 	public void registerUser(User user);
 }

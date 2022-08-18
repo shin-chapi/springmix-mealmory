@@ -14,10 +14,10 @@ public class SignupForm {
 	
 	@NotBlank
 	@Length(max=255)
-	private String username;
+	private String name;
 	
 	@NotBlank
-	@Email
+	@Email(message="emailの形式で入力してください")
 	private String mail;
 	
 	@NotNull

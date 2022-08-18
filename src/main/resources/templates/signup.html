@@ -10,10 +10,10 @@
 	　 <form th:action="@{/signup}" th:object="${signupForm}"
           method="post" >
           <div class="mb-3">
-            <label for="username" th:text=username ></label>
+            <label for="name" th:text=name ></label>
             <input type="text" class="form-control" 
-              th:errorclass="is-invalid" th:field="*{username}" name="username" >
-            <div class="invalid-feedback" th:errors="*{username}">
+              th:errorclass="is-invalid" th:field="*{name}" name="name" >
+            <div class="invalid-feedback" th:errors="*{name}">
             </div>
           </div>
 

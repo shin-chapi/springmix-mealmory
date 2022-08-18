@@ -9,20 +9,20 @@
 		resultMap="userDetails">
 
 		SELECT id,
-		username,
+		name,
 		password,
 		mail,
 
 		FROM user
 		
-		where username = #{username}
+		where name = #{name}
 		
 		
 	</select>
 
 	<resultMap type="com.example.model.User" id="userDetails">
 		<result property="id" column="id" />
-		<result property="username" column="username" />
+		<result property="name" column="name" />
 		<result property="password" column="password" />
 		<result property="mail" column="mail" />
 
@@ -33,14 +33,14 @@
 	<insert id="registerUser">
 		INSERT INTO user
 		(
-		username,
+		name,
 		password,
 		mail
 
 		)
 		VALUES
 		(
-		#{username}
+		#{name}
 		,#{password}
 		,#{mail}
 

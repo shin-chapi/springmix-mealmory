@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -36,18 +37,28 @@ public class SignupController {
 
 	/** ユーザー登録処理 */
 	@PostMapping("signup")
-	public String postsignup(@ModelAttribute @Validated SignupForm form, BindingResult bindingResult, User user) {
+	public String postsignup(@ModelAttribute @Validated SignupForm form, BindingResult bindingResult) {
+		
+		String mail = form.getMail();
+		String name = form.getName();
+		String password = form.getPassword();
+		
+		if (userMapper.identifyUser(mail) != null) {
+            FieldError fieldError = new FieldError(bindingResult.getObjectName(), "email", "その E メールはすでに使用されています。");
+            bindingResult.addError(fieldError);
+        }
 		// 入力チェック結果
 		if (bindingResult.hasErrors()) {
 			// NG:ユーザー登録画面に戻ります
-			return signup(form);
+			return "signup";
 		}
 
 		// ログ表示
 		Logger logger = LoggerFactory.getLogger(SignupController.class);
 		logger.info(form.toString());
 
-		userRegisterationService.registerUser(user);
+		User entity = new User(mail, name, password);
+		userRegisterationService.registerUser(entity);
 
 		// ログイン画面にリダイレクト
 		return "redirect:/login";
