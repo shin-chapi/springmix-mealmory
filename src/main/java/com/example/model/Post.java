@@ -21,8 +21,8 @@ public class Post {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	
-
 	private int categoryId;
 
 	private Date diaryDay;
@@ -47,6 +47,7 @@ public class Post {
 
 	public Post(String name, int categoryId, Date diaryDay, String record1, String record2, String record3,
 			String imageName, String memo, LocalDateTime createAt, LocalDateTime updateAt) {
+		
 		
 		this.categoryId = categoryId;
 		this.diaryDay = diaryDay;
