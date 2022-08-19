@@ -13,7 +13,7 @@
             <label for="name" th:text=name ></label>
             <input type="text" class="form-control" 
               th:errorclass="is-invalid" th:field="*{name}" name="name" >
-            <p th:if="${#fields.hasErrors('name')}" class="invalid-feedback" th:errors="*{name}"></p>
+            <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback" th:errors="*{name}"></div>
             
             
             </div>

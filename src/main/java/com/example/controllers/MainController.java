@@ -1,7 +1,12 @@
 package com.example.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.example.form.PostForm;;
 
 @Controller
 public class MainController {
@@ -12,7 +17,20 @@ public class MainController {
 	}
 
 	@PostMapping("/create")
-	public String create() {
-		return "post";
+	public String create(@ModelAttribute PostForm postform) {
+		return "postEdit";
 	}
+	
+	@PostMapping("edit")
+	public String edit(@ModelAttribute @Validated PostForm postform, BindingResult bindingResult) {
+		
+		// 入力チェック結果
+				if (bindingResult.hasErrors()) {
+					// NG:ユーザー登録画面に戻ります
+					return "postEdit";
+				}
+		
+		return "calendar";
+	}
+	
 }

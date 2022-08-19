@@ -9,8 +9,8 @@
 	<h2>食事記録登録</h2>
 
 	<div class="container">
-		<form class="form-height" id="category" th:action="@{/create}" 
-			method="post" enctype="multipart/form-data">
+		<form th:action="@{/edit}" th:object="${postForm}" method="post"
+			enctype="multipart/form-data">
 			<div class="col-sm-6">
 				<div class="row card forms">
 					<div class="form-group">
@@ -21,52 +21,58 @@
 							<option value="cat">昼食</option>
 							<option value="cat">晩飯</option>
 						</select>
+						<div th:if="${#fields.hasErrors('categoryId')}" 
+							th:errors="*{categoryId}"  class="invalid-feedback"></div>
+						<div class="form-group">
+							<label for="diaryDay">日付</label> <input class="form-control"
+								type="date" id="diaryDay" name="diaryDay" th:field="*{diaryDay}">
+							<div th:if="${#fields.hasErrors('diaryDay')}" 
+								th:errors="*{diaryDay}" class="invalid-feedback"></div>
+						</div>
+						<div class="form-group">
+							<label for="record1"> <span>主食</span>
 
-					</div>
-					<div class="form-group">
-						<label for="diaryDay">日付</label> <input class="form-control"
-							type="date" id="diaryDay" name="diaryDay" th:value="*{diaryDay}">
-					</div>
-					<div class="form-group">
-						<label for="record1"> <span>主食</span>
+							</label> <input class="form-control" type="text" id="record1"
+								name="record1" th:field="*{record1}">
+							<div th:if="${#fields.hasErrors('record1')}"
+								th:errors="*{record1}" th:errorclass="error-messages"></div>
+						</div>
+						<div class="form-group">
+							<label for="record2">
+								<div>主菜</div>
+							</label> <input class="form-control" type="text" id="record2"
+								name="record2" th:field="*{record2}">
+							<div th:if="${#fields.hasErrors('record2')}"
+								th:errors="*{record2}" th:errorclass="error-messages"></div>
+						</div>
+						<div class="form-group">
+							<label for="record3"> <span>副菜</span>
 
-						</label> <input class="form-control" type="text" id="record1"
-							name="record1">
+							</label> <input class="form-control" type="text" id="record3"
+								name="record3" th:field="*{record3}">
+							<div th:if="${#fields.hasErrors('record3')}"
+								th:errors="*{record3}" th:errorclass="error-messages"></div>
+						</div>
+						<div class="form-group">
+							<label for="price">メモ</label>
+							<textarea class="form-control" id="memo" name="memo"
+								th:field="*{memo}" placeholder="1~100文字以内でメモを記入してください"></textarea>
+							<div th:if="${#fields.hasErrors('memo')}" th:errors="*{memo}"
+								th:errorclass="error-messages"></div>
+						</div>
+						<div>
+							<input type="hidden" id="createAt" name="createAt">
+						</div>
+						<div th:object="${fileUploadForm}">
+							<input type="file">
 
-					</div>
-					<div class="form-group">
-						<label for="record2"> <span>主菜</span>
-
-						</label> <input class="form-control" type="text" id="record2"
-							name="record2">
-
-					</div>
-					<div class="form-group">
-						<label for="record3"> <span>副菜</span>
-
-						</label> <input class="form-control" type="text" id="record3"
-							name="record3">
-
-					</div>
-					<div class="form-group">
-						<label for="price">メモ</label>
-						<textarea class="form-control" id="memo" name="memo"
-							placeholder="1~100文字以内でメモを記入してください"></textarea>
-
-					</div>
-					<div>
-						<input type="hidden" id="createAt" name="createAt">
-					</div>
-					<div th:object="${fileUploadForm}">
-						<input type="file">
-
-						<p class="error-messages" th:text="${message}"></p>
-					</div>
-					<div class="form-button">
-						<button class="btn btn-green" type="submit">登録する</button>
+							
+						</div>
+						<div class="form-button">
+							<button class="btn btn-green" type="submit">登録する</button>
+						</div>
 					</div>
 				</div>
-			</div>
 		</form>
 		<a th:href="@{/calendar}">カレンダーへ戻る</a><br> <br>
 	</div>
