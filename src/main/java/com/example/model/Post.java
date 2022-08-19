@@ -3,6 +3,10 @@ package com.example.model;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -11,10 +15,13 @@ import lombok.Setter;
 
 @Getter
 @Setter
-
+@Entity
 @Table(name = "post")
 public class Post {
-	private String name;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 
 	private int categoryId;
 
@@ -40,7 +47,7 @@ public class Post {
 
 	public Post(String name, int categoryId, Date diaryDay, String record1, String record2, String record3,
 			String imageName, String memo, LocalDateTime createAt, LocalDateTime updateAt) {
-		this.name = name;
+		
 		this.categoryId = categoryId;
 		this.diaryDay = diaryDay;
 		this.record1 = record1;
