@@ -9,7 +9,7 @@
 	<h2>食事記録登録</h2>
 
 	<div class="container">
-		<form th:action="@{/edit}" th:object="${postForm}" method="post"
+		<form th:action="@{/edit}" th:object="${postform}" method="post"
 			enctype="multipart/form-data">
 			<div class="col-sm-6">
 				<div class="row card forms">
@@ -39,7 +39,7 @@
 						</div>
 						<div class="form-group">
 							<label for="record2">
-								<div>主菜</div>
+								<span>主菜</span>
 							</label> <input class="form-control" type="text" id="record2"
 								name="record2" th:field="*{record2}">
 							<div th:if="${#fields.hasErrors('record2')}"
@@ -63,15 +63,16 @@
 						<div>
 							<input type="hidden" id="createAt" name="createAt">
 						</div>
-						<div th:object="${fileUploadForm}">
+						 <div th:object="${fileUploadForm}">
 							<input type="file">
 
 							<p class="error-messages" th:text="${message}"></p>
-						</div>
+						</div> 
 						<div class="form-button">
 							<button class="btn btn-green" type="submit">登録する</button>
 						</div>
 					</div>
+				</div>
 				</div>
 		</form>
 		<a th:href="@{/calendar}">カレンダーへ戻る</a><br> <br>

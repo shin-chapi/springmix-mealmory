@@ -17,17 +17,19 @@ public class MainController {
 	}
 
 	@PostMapping("/create")
-	public String create(@ModelAttribute PostForm postform) {
+	public String create(@ModelAttribute("postform") PostForm postform) {
 		return "postEdit";
 	}
 	
-	@PostMapping("edit")
-	public String edit(@ModelAttribute @Validated PostForm postform, BindingResult bindingResult) {
+	@PostMapping("/edit")
+	public String edit(@ModelAttribute("postform") @Validated PostForm postform, BindingResult bindingResult ) {
 		
 		// 入力チェック結果
 				if (bindingResult.hasErrors()) {
+					
 					// NG:ユーザー登録画面に戻ります
 					return "postEdit";
+					
 				}
 		
 		return "calendar";
