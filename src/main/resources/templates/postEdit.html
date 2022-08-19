@@ -17,9 +17,9 @@
 						<label for="cateogryId">カテゴリ</label> <select class="form-control"
 							id="categoryId" name="categoryId">
 							<option value="">--Please choose an option--</option>
-							<option value="god">朝飯</option>
-							<option value="cat">昼食</option>
-							<option value="cat">晩飯</option>
+							<option value="1">朝飯</option>
+							<option value="2">昼食</option>
+							<option value="3">晩飯</option>
 						</select>
 						<div th:if="${#fields.hasErrors('categoryId')}" 
 							th:errors="*{categoryId}"  class="invalid-feedback"></div>

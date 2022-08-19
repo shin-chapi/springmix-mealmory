@@ -16,7 +16,7 @@ public class PostForm {
 
 	private Long id;
 
-	
+	@NotNull
 	private int categoryId;
 	
 	@NotNull(message="日付を入力してください")

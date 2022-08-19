@@ -26,7 +26,7 @@ public class MainController {
 		
 		// 入力チェック結果
 				if (bindingResult.hasErrors()) {
-					
+					System.out.println(bindingResult);
 					// NG:ユーザー登録画面に戻ります
 					return "postEdit";
 					
