@@ -60,7 +60,7 @@ public class SignupController {
         }
 		
 		if (userMapper.identifyMail(mail) != null) {
-            FieldError fieldError = new FieldError(bindingResult.getObjectName(), "name", "そのEメールはすでに使用されています。");
+            FieldError fieldError = new FieldError(bindingResult.getObjectName(), "mail", "そのEメールはすでに使用されています。");
             bindingResult.addError(fieldError);
             return "signup";
         }
