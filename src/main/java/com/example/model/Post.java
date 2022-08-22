@@ -23,6 +23,8 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private String userName;
+	
 	private int categoryId;
 
 	private Date diaryDay;

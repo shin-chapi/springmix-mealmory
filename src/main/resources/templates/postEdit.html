@@ -61,7 +61,7 @@
 								th:errorclass="error-messages"></div>
 						</div>
 						<div>
-							<input type="hidden" id="createAt" name="createAt">
+							<input type="hidden" id="createAt" name="createAt" th:field="*{createAt}">
 						</div>
 						 <div th:object="${fileUploadForm}">
 							<input type="file">
