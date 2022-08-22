@@ -20,11 +20,17 @@ import lombok.Setter;
 @Table(name = "user")
 public class User implements UserDetails {
 
+	 public User(String mail, String name, String password) {
+	        this.mail = mail;
+	        this.name = name;
+	        this.password = password;
+	 }
+	        
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	private String username;
+	private String name;
 
 	private String password;
 
@@ -39,7 +45,7 @@ public class User implements UserDetails {
 	@Override
 	public String getUsername() {
 		// TODO 自動生成されたメソッド・スタブ
-		return username;
+		return name;
 	}
 	@Override
 	public String getPassword() {

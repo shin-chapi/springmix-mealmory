@@ -2,25 +2,20 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layouts/common}" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.2/main.min.css' rel='stylesheet' />
+
+<link rel='stylesheet' href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.2/main.min.css" />
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.2/main.min.js'></script>
 	<script>
-
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-        	headerToolbar: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'dayGridMonth' 
-            },
-            navLinks: true,
-            businessHours: true,
-            editable: true,
-            locale: 'ja',
-        });
-        calendar.render();
-      });
+	
+	document.addEventListener('DOMContentLoaded', function() {
+		var calendarEl = document.getElementById('calendar');
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+			initialView : 'dayGridMonth', 
+			locale: 'ja',
+			events: {url: '/events/all'}
+		});
+		calendar.render();
+	});
 
     </script>
 </head>
@@ -36,6 +31,10 @@
 
 		</form>
 	</div>
+	<form role="form"  th:action="@{/post}" method="post">
+			<button type="submit">新規投稿</button>
+
+		</form>
 	
 	<div id='calendar'></div>
 </section>
