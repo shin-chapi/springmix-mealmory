@@ -47,10 +47,10 @@ public class Post {
 
 	}
 
-	public Post(String name, int categoryId, Date diaryDay, String record1, String record2, String record3,
+	public Post(String userName, int categoryId, Date diaryDay, String record1, String record2, String record3,
 			String imageName, String memo, LocalDateTime createAt, LocalDateTime updateAt) {
 		
-		
+		this.userName = userName;
 		this.categoryId = categoryId;
 		this.diaryDay = diaryDay;
 		this.record1 = record1;

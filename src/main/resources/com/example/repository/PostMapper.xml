@@ -5,9 +5,9 @@
 
     <select id="findAllDiaryRecords" resultType="com.example.model.Post">
         SELECT
-            username,categoryid,diaryday,record1,record2,record3
+            user_name,category_id,diary_day,record1,record2,record3
         FROM
-            diary_record
+            post
         WHERE
             username = #{userName}
         ORDER BY
@@ -16,9 +16,9 @@
 
     <select id="findOneDiaryRecord" resultType="com.example.model.Post">
         SELECT
-            username,categoryid,diaryday,record1,record2,record3,imagename,memo,createat,updateat
+            user_name,category_id,diary_day,record1,record2,record3,image_name,memo,create_at,update_at
         FROM
-            diary_record
+            post
         WHERE
             username = #{userName}
         AND categoryid = #{categoryId}
@@ -27,7 +27,7 @@
     
     <insert id="insertDiaryRecord">
         INSERT INTO
-            diary_record(username,categoryid,diaryday,record1,record2,record3,imagename,memo,createat,updateat)
+            post(user_name,category_id,diary_day,record1,record2,record3,image_name,memo,create_at,update_at)
         VALUES
            (#{userName},
             #{categoryId},
@@ -43,30 +43,30 @@
     
     <update id="updateDiaryRecord" parameterType="com.example.model.Post">
         UPDATE
-            diary_record
+            post
         SET
-            username = #{userName},
-            categoryid = #{categoryId},
-            diaryday = #{diaryDay},
+            user_name = #{userName},
+            category_id = #{categoryId},
+            diary_day = #{diaryDay},
             record1 = #{record1},
             record2 = #{record2},
             record3 = #{record3},
-            imagename = #{imageName},
+            image_name = #{imageName},
             memo = #{memo},
-            updateat = #{updateAt}
+            update_at = #{updateAt}
         WHERE 
-            username = #{userName}
-        AND createat = #{createAt}
+            user_name = #{userName}
+        AND create_at = #{createAt}
     </update>
     
     <delete id="deleteDiaryRecord">
         DELETE
         FROM
-            diary_record
+            post
         WHERE
-            username = #{userName}
-        AND categoryid = #{categoryId}
-        AND diaryday = #{diaryDay}
+            user_name = #{userName}
+        AND category_id = #{categoryId}
+        AND diary_day = #{diaryDay}
     </delete>
 
 </mapper>
