@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 
@@ -36,7 +37,11 @@ public class PostForm {
 	@Size(max=50,message="50文字以内で入力してください")
 	private String record3;
 	
+	private MultipartFile image;
+	
 	private String imageName;
+	
+	
 	
 	@NotBlank
 	@Size(max=100,message="100文字以内で入力してください")

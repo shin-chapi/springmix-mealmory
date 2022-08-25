@@ -36,6 +36,8 @@ public class Post {
 	private String record3;
 
 	private String imageName;
+	
+	
 
 	private String memo;
 
@@ -60,5 +62,10 @@ public class Post {
 		this.memo = memo;
 		this.createAt = createAt;
 		this.updateAt = updateAt;
+	}
+
+	public void setPath(String absolutePath) {
+		// TODO 自動生成されたメソッド・スタブ
+		
 	}
 }
