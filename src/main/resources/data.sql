@@ -1,6 +1,6 @@
 INSERT INTO user
 (
-   username,
+   name,
    password,
    mail
    

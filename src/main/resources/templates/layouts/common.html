@@ -6,13 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="css/app.css">
-   <script src="js/app.js" th:src="@{/js/app.js}"  type="application/javascript" defer></script> 
+     <link rel="stylesheet" href="css/fullcalendar.css">
+   <script src="js/app.js"   type="application/javascript" defer></script> 
+
+
+
+
 
 
     <title>Mealmory</title>
+    
+    
   </head>
   <body>
-    <div id="app">
+  
+    <header id="app">
       <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" >Mealmory</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,8 +51,8 @@
           </section>
         </div>
 
-      </main><!-- /.container -->
-    </div>
+      </main>
+    </header>
     
     <section layout:fragment="js">
     </section>

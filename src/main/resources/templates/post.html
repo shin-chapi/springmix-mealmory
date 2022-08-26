@@ -1,0 +1,12 @@
+<!doctype html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{layouts/common}">
+  <section layout:fragment="content">
+	<div class="col-lg-8 offset-lg-2 text-center">
+		<h1>新規登録</h1>
+	</div>
+	
+	<form  th:action="@{/create}" method="post">
+	<button type="submit">編集する</button>
+	</form>
+	</section>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.repository.PostMapper">
+
+    <select id="findAllDiaryRecords" resultType="com.example.model.Post">
+        SELECT
+            user_name,category_id,diary_day,record1,record2,record3
+        FROM
+            post
+        WHERE
+            username = #{userName}
+        ORDER BY
+            diaryday,categoryid
+    </select>
+
+    <select id="findOneDiaryRecord" resultType="com.example.model.Post">
+        SELECT
+            user_name,category_id,diary_day,record1,record2,record3,image_name,memo,create_at,update_at
+        FROM
+            post
+        WHERE
+            username = #{userName}
+        AND categoryid = #{categoryId}
+        AND diaryday = #{diaryDay}
+    </select>
+    
+    <insert id="insertDiaryRecord">
+        INSERT INTO
+            post(user_name,category_id,diary_day,record1,record2,record3,image_name,memo,create_at,update_at)
+        VALUES
+           (#{userName},
+            #{categoryId},
+            #{diaryDay},
+            #{record1},
+            #{record2},
+            #{record3},
+            #{imageName},
+            #{memo},
+            #{createAt},
+            #{updateAt})
+    </insert>
+    
+    <update id="updateDiaryRecord" parameterType="com.example.model.Post">
+        UPDATE
+            post
+        SET
+            user_name = #{userName},
+            category_id = #{categoryId},
+            diary_day = #{diaryDay},
+            record1 = #{record1},
+            record2 = #{record2},
+            record3 = #{record3},
+            image_name = #{imageName},
+            memo = #{memo},
+            update_at = #{updateAt}
+        WHERE 
+            user_name = #{userName}
+        AND create_at = #{createAt}
+    </update>
+    
+    <delete id="deleteDiaryRecord">
+        DELETE
+        FROM
+            post
+        WHERE
+            user_name = #{userName}
+        AND category_id = #{categoryId}
+        AND diary_day = #{diaryDay}
+    </delete>
+
+</mapper>
