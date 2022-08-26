@@ -7,9 +7,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 
-public class FileUploadForm {
+public class FileUploadForm  {
 	
-	
+
 	private MultipartFile multipartFile;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")

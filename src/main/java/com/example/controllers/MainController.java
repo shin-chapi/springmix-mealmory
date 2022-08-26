@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.form.FileUploadForm;
 import com.example.form.PostForm;
@@ -43,7 +44,7 @@ public class MainController {
 	@PostMapping("/edit")
 	public String edit( @AuthenticationPrincipal User details,
 			            @ModelAttribute("postform") @Validated PostForm postform, BindingResult bindingResult,
-			            @ModelAttribute("fileUploadForm")  @Validated FileUploadForm file,BindingResult resultFile,Model model) throws Exception{
+			            @ModelAttribute("fileUploadForm")  @Validated FileUploadForm file,BindingResult resultFile,MultipartFile image ,Model model) throws Exception{
 		
 		// 入力チェック結果
 				if (bindingResult.hasErrors()|| resultFile.hasErrors()) {
@@ -55,7 +56,7 @@ public class MainController {
 				String imageName = null;
 				LocalDateTime dateTime = LocalDateTime.now();
 				file.setCreateAt(dateTime);
-				imageName = fileUploadService.fileUpload(file);
+				imageName = fileUploadService.fileUpload(file,image,null);
 				
 				postform.setUserName(details.getUsername());
 				postform.setCreateAt(dateTime);
