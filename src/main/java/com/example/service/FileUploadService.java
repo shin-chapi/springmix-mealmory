@@ -40,6 +40,6 @@ public class FileUploadService {
 	        String localfileName = image.getOriginalFilename();
 	        File destFile = new File(realPathToUploads, localfileName);
 	        image.transferTo(destFile);
-				return null;
+				return fileName;
 }
 }

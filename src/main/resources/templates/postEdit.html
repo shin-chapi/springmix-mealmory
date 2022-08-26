@@ -64,7 +64,7 @@
 							<input type="hidden" id="createAt" name="createAt" th:field="*{createAt}">
 						</div>
 						 <div th:object="${fileUploadForm}">
-							<input type="file">
+							<input type="file" name="image">
 
 							<p class="error-messages" th:text="${message}"></p>
 						</div> 

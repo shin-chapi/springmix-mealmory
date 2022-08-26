@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.form.FileUploadForm;
@@ -44,7 +45,8 @@ public class MainController {
 	@PostMapping("/edit")
 	public String edit( @AuthenticationPrincipal User details,
 			            @ModelAttribute("postform") @Validated PostForm postform, BindingResult bindingResult,
-			            @ModelAttribute("fileUploadForm")  @Validated FileUploadForm file,BindingResult resultFile,MultipartFile image ,Model model) throws Exception{
+			            @ModelAttribute("fileUploadForm")  @Validated FileUploadForm file,BindingResult resultFile,
+			            @RequestParam MultipartFile image ,Model model) throws Exception{
 		
 		// 入力チェック結果
 				if (bindingResult.hasErrors()|| resultFile.hasErrors()) {
