@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.ServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,7 +31,7 @@ public class MainController {
 	private final PostRecordService postRecordService;
 	
 	@Autowired
-	private static HttpServletRequest request;
+	private static ServletRequest request;
 
 	public MainController(PostRecordService postRecordService) {
 		this.postRecordService = postRecordService;
@@ -49,7 +49,7 @@ public class MainController {
 	}
 
 	@PostMapping("/edit")
-	public String edit(Principal principal,User user ,@ModelAttribute("postform") @Validated PostForm postform,
+	public String edit(Principal principal ,User user,@ModelAttribute("postform") @Validated PostForm postform,
 			BindingResult bindingResult, @RequestParam MultipartFile image, RedirectAttributes redirAttrs)
 			throws IOException {
 
@@ -60,23 +60,27 @@ public class MainController {
 			return "postEdit";
 
 		}
-		 boolean isImageLocal = false;
-	        if (imageLocal != null) {
-	            isImageLocal = new Boolean(imageLocal);
-	        }
+//		 boolean isImageLocal = false;
+//	        if (imageLocal != null) {
+//	            isImageLocal = new Boolean(imageLocal);
+//	        }
 
-	        Post entity = new Post();
+	        Post entity = new Post(postform.getUserName(), postform.getCategoryId(), postform.getDiaryDay(), postform.getRecord1(),
+					postform.getRecord2(), postform.getRecord3(),  postform.getMemo(),postform.getImageName(), postform.getCreateAt(),
+					postform.getCreateAt());
 //	        Authentication authentication = (Authentication) principal;
 //	        User user = (User) authentication.getPrincipal();
 	        entity.setId(user.getId());
 	        File destFile = null;
-	        if (isImageLocal) {
+	       
 	            destFile = saveImageLocal(image, entity);
 	            entity.setPath(destFile.getAbsolutePath());
-	        } else {
-	            entity.setPath("");
-	        }
+	            System.out.println(entity);
+	      
+	        
 	        entity.setMemo(postform.getMemo());
+	        
+	         
 	     
 	        
 	        postRecordService.insertDiaryRecord(entity);
@@ -98,7 +102,7 @@ public class MainController {
 	            new File(realPathToUploads).mkdir();
 	        }
 	        String fileName = image.getOriginalFilename();
-	        File destFile = new File(realPathToUploads, fileName);
+	        File destFile = new File( fileName);
 	        image.transferTo(destFile);
 
 	        return destFile;
