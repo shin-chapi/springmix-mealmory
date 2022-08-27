@@ -20,7 +20,7 @@ public class PostRecordService {
 	@Transactional(readOnly = false)
 	public void insertDiaryRecord(PostForm form) {
 		Post diary = new Post(form.getUserName(), form.getCategoryId(), form.getDiaryDay(), form.getRecord1(),
-				form.getRecord2(), form.getRecord3(),  form.getMemo(),form.getImageName(), form.getCreateAt(),
+				form.getRecord2(), form.getRecord3(), form.getImageName(), form.getMemo(), form.getCreateAt(),
 				form.getCreateAt());
 		PostMapper.insertDiaryRecord(diary);
 	}
