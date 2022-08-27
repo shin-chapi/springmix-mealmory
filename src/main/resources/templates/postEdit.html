@@ -16,15 +16,15 @@
 					<div class="form-group">
 						<label for="cateogryId">カテゴリ</label> <select class="form-control"
 							id="categoryId" name="categoryId">
-							<option th:each="list:${lists}" 
-			                th:value="${list.categoryId}" th:text="${list.categoryName}"></option>
+							<option th:each="list:${lists}" th:value="${list.categoryId}"
+								th:text="${list.categoryName}"></option>
 						</select>
-						<div th:if="${#fields.hasErrors('categoryId')}" 
-							th:errors="*{categoryId}" th:errorclass="error-messages" ></div>
+						<div th:if="${#fields.hasErrors('categoryId')}"
+							th:errors="*{categoryId}" th:errorclass="error-messages"></div>
 						<div class="form-group">
 							<label for="diaryDay">日付</label> <input class="form-control"
 								type="date" id="diaryDay" name="diaryDay" th:field="*{diaryDay}">
-							<div th:if="${#fields.hasErrors('diaryDay')}" 
+							<div th:if="${#fields.hasErrors('diaryDay')}"
 								th:errors="*{diaryDay}" class="invalid-feedback"></div>
 						</div>
 						<div class="form-group">
@@ -36,8 +36,7 @@
 								th:errors="*{record1}" th:errorclass="error-messages"></div>
 						</div>
 						<div class="form-group">
-							<label for="record2">
-								<span>主菜</span>
+							<label for="record2"> <span>主菜</span>
 							</label> <input class="form-control" type="text" id="record2"
 								name="record2" th:field="*{record2}">
 							<div th:if="${#fields.hasErrors('record2')}"
@@ -59,19 +58,21 @@
 								th:errorclass="error-messages"></div>
 						</div>
 						<div>
-							<input type="hidden" id="createAt" name="createAt" th:field="*{createAt}">
+							<input type="hidden" id="createAt" name="createAt"
+								th:field="*{createAt}">
 						</div>
-						 <div th:object="${fileUploadForm}">
+						<div th:object="${fileUploadForm}">
 							<input type="file" name="image">
-
+							<div th:if="${#fields.hasErrors('multipartFile')}"
+								th:errors="*{multipartFile}" th:errorclass="error-messages"></div>
 							<p class="error-messages" th:text="${message}"></p>
-						</div> 
+						</div>
 						<div class="form-button">
 							<button class="btn btn-green" type="submit">登録する</button>
 						</div>
 					</div>
 				</div>
-				</div>
+			</div>
 		</form>
 		<a th:href="@{/calendar}">カレンダーへ戻る</a><br> <br>
 	</div>

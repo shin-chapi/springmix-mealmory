@@ -53,15 +53,28 @@ public class MainController {
 		
 		// 入力チェック結果
 				if (bindingResult.hasErrors()|| resultFile.hasErrors()) {
+					model.addAttribute("lists", PostRecordCategory.values());
 					System.out.println(bindingResult);
 					// NG:ユーザー登録画面に戻ります
 					return "postEdit";
 					
 				}
+				
+				PostForm exist = postRecordService.findOneDiaryRecord(details.getUsername(), postform.getCategoryId(), postform.getDiaryDay());
+				if(exist != null) {
+					model.addAttribute("lists", PostRecordCategory.values());
+					model.addAttribute("message","既に同じカテゴリ、同じ日付で登録されています");
+					return "postEdit";
+				}
+				
+				
 				String imageName = null;
 				LocalDateTime dateTime = LocalDateTime.now();
+				
+				
 				file.setCreateAt(dateTime);
 				imageName = fileUploadService.fileUpload(file,image,null);
+				
 				
 				postform.setUserName(details.getUsername());
 				postform.setCreateAt(dateTime);

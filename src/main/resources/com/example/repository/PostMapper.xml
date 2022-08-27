@@ -20,9 +20,9 @@
         FROM
             post
         WHERE
-            username = #{userName}
-        AND categoryid = #{categoryId}
-        AND diaryday = #{diaryDay}
+            user_name = #{userName}
+        AND category_id = #{categoryId}
+        AND diary_day = #{diaryDay}
     </select>
     
     <insert id="insertDiaryRecord">
