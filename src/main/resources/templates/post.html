@@ -8,5 +8,8 @@
 	
 	<form  th:action="@{/create}" method="post">
 	<button type="submit">編集する</button>
+	<div class="col-sm-6" th:if="${exist}">
+	    <img th:src="${image}" style="width: 100%; height:auto;" /><br>
+	</div>
 	</form>
 	</section>

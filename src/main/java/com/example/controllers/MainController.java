@@ -34,7 +34,7 @@ public class MainController {
 	}
 
 	@PostMapping("/post")
-	public String post() {
+	public String post(@AuthenticationPrincipal User details) {
 		return "post";
 	}
 

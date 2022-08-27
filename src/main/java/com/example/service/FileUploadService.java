@@ -28,6 +28,8 @@ public class FileUploadService {
 		if(fileName == null) {
         	fileName = fileUploadForm.getCreateAt().format(fm) + " " + UUID.randomUUID() +".";
         }
+		
+		
 		 File uploadDir = new File("/uploads");
 	        uploadDir.mkdir();
 	        
