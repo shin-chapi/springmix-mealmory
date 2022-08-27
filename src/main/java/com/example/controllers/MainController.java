@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.form.FileUploadForm;
 import com.example.form.PostForm;
 import com.example.model.User;
+import com.example.model.enums.PostRecordCategory;
 import com.example.service.FileUploadService;
 import com.example.service.PostRecordService;;
 
@@ -38,7 +39,9 @@ public class MainController {
 	}
 
 	@PostMapping("/create")
-	public String create(@ModelAttribute("postform") PostForm postform) {
+	public String create(@ModelAttribute("postform") PostForm postform,
+			             @ModelAttribute("fileUploadForm")  FileUploadForm file,Model model) {
+		model.addAttribute("lists", PostRecordCategory.values());
 		return "postEdit";
 	}
 	
