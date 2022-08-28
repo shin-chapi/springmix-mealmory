@@ -31,17 +31,18 @@ public class FileUploadService {
 		
 		
 		 File uploadDir = new File("/uploads");
-	        uploadDir.mkdir();
+	        uploadDir.mkdirs();
 	        
 	        String uploadsDir = "/uploads/";
 	        String realPathToUploads = request.getServletContext().getRealPath(uploadsDir);
 	        if (!new File(realPathToUploads).exists()) {
-	            new File(realPathToUploads).mkdir();
+	            new File(realPathToUploads).mkdirs();
 	        }
 	        
 	        String localfileName = image.getOriginalFilename();
 	        File destFile = new File(realPathToUploads, localfileName);
 	        image.transferTo(destFile);
+	      
 				return fileName;
 }
 }
