@@ -21,16 +21,15 @@ import com.example.service.PostRecordService;;
 
 @Controller
 public class MainController {
-	
+
 	private final PostRecordService postRecordService;
-	
+
 	private final FileUploadService fileUploadService;
-	
-	public MainController(PostRecordService postRecordService,FileUploadService fileUploadService
-			) {
+
+	public MainController(PostRecordService postRecordService, FileUploadService fileUploadService) {
 		this.postRecordService = postRecordService;
 		this.fileUploadService = fileUploadService;
-		
+
 	}
 
 	@PostMapping("/post")
@@ -40,49 +39,49 @@ public class MainController {
 
 	@PostMapping("/create")
 	public String create(@ModelAttribute("postform") PostForm postform,
-			             @ModelAttribute("fileUploadForm")  FileUploadForm file,Model model) {
+			@ModelAttribute("fileUploadForm") FileUploadForm file, Model model) {
 		model.addAttribute("lists", PostRecordCategory.values());
 		return "postEdit";
 	}
-	
+
 	@PostMapping("/edit")
-	public String edit( @AuthenticationPrincipal User details,
-			            @ModelAttribute("postform") @Validated PostForm postform, BindingResult bindingResult,
-			            @ModelAttribute("fileUploadForm")  @Validated FileUploadForm file,BindingResult resultFile,
-			            @RequestParam MultipartFile image ,Model model) throws Exception{
-		
+	public String edit(@AuthenticationPrincipal User details, @ModelAttribute("postform") @Validated PostForm postform,
+			BindingResult bindingResult, @ModelAttribute("fileUploadForm") @Validated FileUploadForm file,
+			BindingResult resultFile, @RequestParam MultipartFile image, Model model) throws Exception {
+
 		// 入力チェック結果
-				if (bindingResult.hasErrors()|| resultFile.hasErrors()) {
-					model.addAttribute("lists", PostRecordCategory.values());
-					System.out.println(bindingResult);
-					// NG:ユーザー登録画面に戻ります
-					return "postEdit";
-					
-				}
-				
-				PostForm exist = postRecordService.findOneDiaryRecord(details.getUsername(), postform.getCategoryId(), postform.getDiaryDay());
-				if(exist != null) {
-					model.addAttribute("lists", PostRecordCategory.values());
-					model.addAttribute("message","既に同じカテゴリ、同じ日付で登録されています");
-					return "postEdit";
-				}
-				
-				
-				String imageName = null;
-				LocalDateTime dateTime = LocalDateTime.now();
-				
-				
-				file.setCreateAt(dateTime);
-				imageName = fileUploadService.fileUpload(file,image,null);
-				
-				
-				postform.setUserName(details.getUsername());
-				postform.setCreateAt(dateTime);
-				postform.setImageName(imageName);
-				postRecordService.insertDiaryRecord(postform);
-			
-		
+		if (bindingResult.hasErrors() || resultFile.hasErrors()) {
+			model.addAttribute("lists", PostRecordCategory.values());
+			System.out.println(bindingResult);
+			// NG:ユーザー登録画面に戻ります
+			return "postEdit";
+
+		}
+
+		PostForm exist = postRecordService.findOneDiaryRecord(details.getUsername(), postform.getCategoryId(),
+				postform.getDiaryDay());
+		if (exist != null) {
+			model.addAttribute("lists", PostRecordCategory.values());
+			model.addAttribute("message", "既に同じカテゴリ、同じ日付で登録されています");
+			return "postEdit";
+		}
+
+		String imageName = null;
+		LocalDateTime dateTime = LocalDateTime.now();
+
+		// ファイルが空でない場合に、ファイルの中身をチェックする
+		if (!image.isEmpty()) {
+
+			file.setCreateAt(dateTime);
+			imageName = fileUploadService.fileUpload(file, image, null);
+
+		}
+		postform.setUserName(details.getUsername());
+		postform.setCreateAt(dateTime);
+		postform.setImageName(imageName);
+		postRecordService.insertDiaryRecord(postform);
+
 		return "calendar";
 	}
-	
+
 }
