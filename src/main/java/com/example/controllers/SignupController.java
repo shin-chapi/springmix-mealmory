@@ -23,12 +23,14 @@ public class SignupController {
 	@Autowired
 	public UserMapper userMapper;
 
+
 	
 
 	
 	//@Autowired
 	public BCryptPasswordEncoder encoder;
 	
+
 	@Autowired
 	public UserRegisterationService userRegisterationService;
 
@@ -58,6 +60,9 @@ public class SignupController {
             bindingResult.addError(fieldError);
             return "signup";
         }
+
+
+
 		
 		if (userMapper.identifyMail(mail) != null) {
             FieldError fieldError = new FieldError(bindingResult.getObjectName(), "mail", "そのEメールはすでに使用されています。");
