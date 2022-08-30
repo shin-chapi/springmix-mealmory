@@ -1,54 +1,99 @@
 package com.example.service;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
+import java.util.Base64;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.imageio.ImageIO;
 
 import org.apache.commons.io.FilenameUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.s3.model.S3ObjectInputStream;
+import com.amazonaws.util.IOUtils;
 import com.example.form.FileUploadForm;
-
 
 @Service
 public class FileUploadService {
 	
-	@Autowired
-    private HttpServletRequest request;
-
 	
-	public String fileUpload(FileUploadForm fileUploadForm,MultipartFile image,String fileName) 
-		       throws IOException{
+	
+
+	private final AmazonS3 s3Client;
+
+	public FileUploadService(AmazonS3 s3Client) {
+		this.s3Client = s3Client;
+		
+	}
+
+	public boolean fileValid(FileUploadForm fileUploadForm) throws IOException {
+		try (ByteArrayInputStream bis = new ByteArrayInputStream(fileUploadForm.getMultipartFile().getBytes())) {
+			BufferedImage bi = ImageIO.read(bis);
+			if (bi != null) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw e;
+		}
+
+	}
+
+	public String fileUpload(FileUploadForm fileUploadForm, String s3PathName, String fileName)
+			throws IOException {
 		DateTimeFormatter fm = DateTimeFormatter.ofPattern("yyyy-MM-dd HH-mm-ss");
+
+		String extension = FilenameUtils.getExtension(fileUploadForm.getMultipartFile().getOriginalFilename())
+				.toLowerCase();
+		File uploadFile = new File(fileName);
+		// 画像の新規アップロードはUUID,画像更新は何もしない
+		if (fileName == null) {
+			fileName = fileUploadForm.getCreateAt().format(fm) + " " + UUID.randomUUID() + "." + extension;
+		}
+
+		try (FileOutputStream uploadFileStream = new FileOutputStream(uploadFile)){
+    		byte[] bytes = fileUploadForm.getMultipartFile().getBytes();
+	        uploadFileStream.write(bytes);
+
+			// メタデータ設定してS3へアップロード
+//			try (ByteArrayInputStream bis = new ByteArrayInputStream(uploadFileStream.toByteArray())) {
+//				ObjectMetadata metaData = new ObjectMetadata();
+//				byte[] size = uploadFileStream.toByteArray();
+//				metaData.setContentLength(size.length);
+
+				// S3の格納先オブジェクト名,ファイル名,inputStream,メタデータ
+				s3Client.putObject(s3PathName, fileName, uploadFile);
+			}
+			return fileName;
+	 
+     } 
+     
+	
 		
-		
-		String extension = FilenameUtils.getExtension(image.getOriginalFilename()).toLowerCase();
-		//画像の新規アップロードはUUID,画像更新は何もしない
-		if(fileName == null) {
-        	fileName = fileUploadForm.getCreateAt().format(fm) + " " + UUID.randomUUID() +"." + extension;
-        }
-		
-		
-		 File uploadDir = new File("/uploads");
-	        uploadDir.mkdirs();
-	        
-	        String uploadsDir = "/uploads/";
-	        String realPathToUploads = request.getServletContext().getRealPath(uploadsDir);
-	       
-	        if (!new File(realPathToUploads).exists()) {
-	            new File(realPathToUploads).mkdirs();
-	        }
-	        
-	        String localfileName = image.getOriginalFilename();
-	        File destFile = new File(realPathToUploads, localfileName);
-	        System.out.println(realPathToUploads + "/" + localfileName );
-	        image.transferTo(destFile);
-	      
-				return fileName;
-}
+	
+
+	public String fileDownload(String bucketName, String objectName) {
+		S3Object s3Object = s3Client.getObject(bucketName, objectName);
+		StringBuffer data = new StringBuffer();
+		try (S3ObjectInputStream inputStream = s3Object.getObjectContent()) {
+			byte[] content = IOUtils.toByteArray(inputStream);
+			String base64Data = Base64.getEncoder().encodeToString(content);
+
+			data.append(base64Data);
+			return data.toString();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return "";
+		}
+	}
+
 }

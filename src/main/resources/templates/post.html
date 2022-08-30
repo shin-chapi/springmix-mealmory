@@ -1,15 +1,17 @@
 <!doctype html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
-	layout:decorate="~{layouts/common}">
-  <section layout:fragment="content">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/common}">
+<section layout:fragment="content">
 	<div class="col-lg-8 offset-lg-2 text-center">
 		<h1>新規登録</h1>
 	</div>
-	
-	<form  th:action="@{/create}" method="post">
-	<button type="submit">編集する</button>
-	<div class="col-sm-6" th:if="${exist}">
-	    <img th:src="${image}" style="width: 100%; height:auto;" /><br>
-	</div>
+
+	<form th:action="@{/create}" method="post">
+		<button type="submit">編集する</button>		
 	</form>
-	</section>
+	<div class="col-sm-6" >
+			<h2 class="author" ></h2>
+			<img src="" th:if="${@environment.getProperty('image.local')}"
+				th:src="${topic.imageData}" class="image" />
+		</div>
+</section>
