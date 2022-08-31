@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 
 import org.apache.commons.imaging.ImageReadException;
 import org.apache.commons.imaging.ImageWriteException;
+import org.apache.commons.imaging.formats.jpeg.exif.ExifRewriter;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
 
@@ -27,14 +28,14 @@ import com.example.form.FileUploadForm;
 @Service
 public class FileUploadService {
 	
-	
+	private final ExifRewriter exifRewriter;
 	
 
 	private final AmazonS3 s3Client;
 
-	public FileUploadService(AmazonS3 s3Client) {
+	public FileUploadService(AmazonS3 s3Client,ExifRewriter exifRewriter) {
 		this.s3Client = s3Client;
-		
+		this.exifRewriter = exifRewriter;
 		
 	}
 
@@ -70,7 +71,7 @@ public class FileUploadService {
 	        try (ByteArrayOutputStream uploadFileStream = new ByteArrayOutputStream()){
 	        	//JpegイメージからEXIFメタデータを削除して、結果をストリームに書き込む
 	        	byte[] bytes = fileUploadForm.getMultipartFile().getBytes();
-//	        	exifRewriter.removeExifMetadata(bytes, uploadFileStream);
+	        	exifRewriter.removeExifMetadata(bytes, uploadFileStream);
 	        	
 	        	//メタデータ設定してS3へアップロード
 	        	try(ByteArrayInputStream bis = new ByteArrayInputStream(uploadFileStream.toByteArray())){
