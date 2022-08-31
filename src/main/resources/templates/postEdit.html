@@ -62,7 +62,7 @@
 								th:field="*{createAt}">
 						</div>
 						<div th:object="${fileUploadForm}">
-							<input type="file" name="image">
+							<input type="file" th:field="*{multipartFile}">
 							<div th:if="${#fields.hasErrors('multipartFile')}"
 								th:errors="*{multipartFile}" th:errorclass="error-messages"></div>
 							<p class="error-messages" th:text="${message}"></p>

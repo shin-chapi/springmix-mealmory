@@ -5,11 +5,13 @@ import java.time.LocalDateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.form.validation.ConfirmFileUpload;
+
 
 
 public class FileUploadForm  {
 	
-
+	@ConfirmFileUpload
 	private MultipartFile multipartFile;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
