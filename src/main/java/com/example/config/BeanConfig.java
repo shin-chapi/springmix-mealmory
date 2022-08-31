@@ -11,4 +11,6 @@ public class BeanConfig {
 	public ExifRewriter exifRewriter() {
 		return new ExifRewriter();
 	}
+	
+	
 }

@@ -16,27 +16,26 @@ public class UserRegisterationService {
 	@Autowired
 	public UserMapper userMapper;
 	
-//	@Autowired
+	
 	public BCryptPasswordEncoder encoder;
 	
 	@Transactional
 	public  void registerUser(User user) {
 		
 		
-		//DIコンテナ勉強用
-				ClassPathXmlApplicationContext context = 
-						new ClassPathXmlApplicationContext("applicationContext.xml");
-				BCryptPasswordEncoder encoder = context.getBean(BCryptPasswordEncoder.class);
-				;
-				
-				String rawPassword = user.getPassword();
-				user.setPassword(encoder.encode(rawPassword));
-				
-				
-				userMapper.registerUser(user);
-				context.close();
+
+		ClassPathXmlApplicationContext context = 
+				new ClassPathXmlApplicationContext("applicationContext.xml");
+		encoder  = context.getBean(BCryptPasswordEncoder.class);
 		
 		
+		String rawPassword = user.getPassword();
+		user.setPassword(encoder.encode(rawPassword));
+		
+		userMapper.registerUser(user);
+		context.close();
+		
+
 	}
 	
 	
