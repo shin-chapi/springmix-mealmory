@@ -5,7 +5,13 @@
 
     <select id="findAllDiaryRecords" resultType="com.example.model.Post">
         SELECT
-            id,user_name,category_id,diary_day,record1,record2,record3
+            id as id, 
+            user_name as userName,
+            category_id as categoryId,
+            diary_day as diaryDay,
+            record1 as record1,
+            record2 as record2,
+            record3 as record3
         FROM
             post
         WHERE
