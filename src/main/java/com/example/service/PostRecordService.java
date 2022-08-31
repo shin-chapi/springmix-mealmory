@@ -38,8 +38,8 @@ public class PostRecordService {
 
 			switch (diary.getCategoryId()) {
 			case 1:
-				calendar.setTitle("<a href=\"/index/record/" + calendar.getStart() + "/1\">" + "朝食:"
-						+ returnTitle(diary) + "</a>");
+				calendar.setTitle( calendar.getStart() 
+						+ returnTitle(diary) );
 				break;
 			case 2:
 				calendar.setTitle("<a href=\"/index/record/" + calendar.getStart() + "/2\">" + "昼食:"
