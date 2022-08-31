@@ -35,19 +35,20 @@ public class PostRecordService {
 			CalendarRecord calendar = new CalendarRecord();
 			calendar.setStart(simpleDate.format(diary.getDiaryDay()));
 			calendar.setEnd(simpleDate.format(diary.getDiaryDay()));
-
+			
+			
 			switch (diary.getCategoryId()) {
 			case 1:
-				calendar.setTitle( calendar.getStart() 
-						+ "朝食" );
+				calendar.setUrl("/index/record/" + calendar.getStart() + "/1" );
+				calendar.setTitle("朝食" );
 				break;
 			case 2:
-				calendar.setTitle( calendar.getStart() 
-						+ "昼食" );
+				calendar.setUrl("/index/record/" + calendar.getStart() + "/2" );
+				calendar.setTitle(  "昼食" );
 				break;
 			case 3:
-				calendar.setTitle( calendar.getStart()
-						+ "夕食" );
+				calendar.setUrl("/index/record/" + calendar.getStart() + "/3" );
+				calendar.setTitle( "夕食" );
 				break;
 
 			}

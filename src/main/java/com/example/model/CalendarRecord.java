@@ -7,15 +7,19 @@ public class CalendarRecord {
 	private String start;
 
 	private String end;
+	
+	private String url;
+
 
 	public CalendarRecord() {
 
 	}
 
-	public CalendarRecord(String title, String start, String end) {
+	public CalendarRecord(String title, String start, String end, String url) {
 		this.title = title;
 		this.start = start;
 		this.end = end;
+		this.url = url;
 	}
 
 	public String getTitle() {
@@ -42,4 +46,12 @@ public class CalendarRecord {
 		this.end = end;
 	}
 
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
 }

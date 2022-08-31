@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -102,7 +101,6 @@ public class MainController {
 	
 	
 	@GetMapping("/index/record/{diaryDay}/{id}")
-	@PreAuthorize("principal.username != 'guestuser'")
 	public String showUserEditContent(@AuthenticationPrincipal User details,
 			                          @PathVariable("id")int id,
 			                          @PathVariable("diaryDay")String diaryDay,
@@ -125,6 +123,6 @@ public class MainController {
 		
 		model.addAttribute("diaryRecordForm", form);
 		model.addAttribute("lists", PostRecordCategory.values());
-		return "UserCalendar/Edit";
+		return "post";
 	}
 }
