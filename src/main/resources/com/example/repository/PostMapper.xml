@@ -5,13 +5,13 @@
 
     <select id="findAllDiaryRecords" resultType="com.example.model.Post">
         SELECT
-            user_name,category_id,diary_day,record1,record2,record3
+            id,user_name,category_id,diary_day,record1,record2,record3
         FROM
             post
         WHERE
-            username = #{userName}
+            user_name = #{userName}
         ORDER BY
-            diaryday,categoryid
+            diary_day,category_id
     </select>
 
     <select id="findOneDiaryRecord" resultType="com.example.model.Post">

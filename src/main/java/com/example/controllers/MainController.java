@@ -1,13 +1,18 @@
 package com.example.controllers;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.form.FileUploadForm;
@@ -94,4 +99,32 @@ public class MainController {
 		return "calendar";
 	}
 
+	
+	
+	@GetMapping("/index/record/{diaryDay}/{id}")
+	@PreAuthorize("principal.username != 'guestuser'")
+	public String showUserEditContent(@AuthenticationPrincipal User details,
+			                          @PathVariable("id")int id,
+			                          @PathVariable("diaryDay")String diaryDay,
+			                          @ModelAttribute("fileUploadForm") FileUploadForm file,Model model) throws Exception{
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date parsedDate =  format.parse(diaryDay);
+
+		PostForm form = postRecordService.findOneDiaryRecord(details.getUsername(), id, parsedDate);
+		if(form == null) {
+			return "error/404";
+		}
+		
+		if(form.getImageName() != null) {
+			String src = fileUploadService.fileDownload(s3Path, form.getImageName());
+			model.addAttribute("exist", true);
+			model.addAttribute("image", "data:image/jpg;base64," + src);
+		} else {
+			model.addAttribute("exist", false);
+		}
+		
+		model.addAttribute("diaryRecordForm", form);
+		model.addAttribute("lists", PostRecordCategory.values());
+		return "UserCalendar/Edit";
+	}
 }

@@ -1,15 +1,18 @@
 package com.example.service;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.form.PostForm;
+import com.example.model.CalendarRecord;
 import com.example.model.Post;
 import com.example.repository.PostMapper;
-
 
 @Service
 public class PostRecordService {
@@ -20,6 +23,49 @@ public class PostRecordService {
 		this.PostMapper = PostMapper;
 	}
 
+	@Transactional(readOnly = true)
+	public List<CalendarRecord> findAllCalendarRecords(String userName) {
+		SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd");
+
+		List<Post> diaryRecords = PostMapper.findAllDiaryRecords(userName);
+		List<CalendarRecord> calendarRecords = new ArrayList<CalendarRecord>();
+
+		for (int i = 0; i < diaryRecords.size(); i++) {
+			Post diary = diaryRecords.get(i);
+			CalendarRecord calendar = new CalendarRecord();
+			calendar.setStart(simpleDate.format(diary.getDiaryDay()));
+			calendar.setEnd(simpleDate.format(diary.getDiaryDay()));
+
+			switch (diary.getCategoryId()) {
+			case 1:
+				calendar.setTitle("<a href=\"/index/record/" + calendar.getStart() + "/1\">" + "朝食:"
+						+ returnTitle(diary) + "</a>");
+				break;
+			case 2:
+				calendar.setTitle("<a href=\"/index/record/" + calendar.getStart() + "/2\">" + "昼食:"
+						+ returnTitle(diary) + "</a>");
+				break;
+			case 3:
+				calendar.setTitle("<a href=\"/index/record/" + calendar.getStart() + "/3\">" + "夕食:"
+						+ returnTitle(diary) + "</a>");
+				break;
+
+			}
+			calendarRecords.add(calendar);
+		}
+		return calendarRecords;
+	}
+
+	public String returnTitle(Post diary) {
+		if (diary.getRecord2() != null) {
+			return diary.getRecord2();
+		} else if (diary.getRecord1() != null) {
+			return diary.getRecord1();
+		} else {
+			return diary.getRecord3();
+		}
+	}
+
 	@Transactional(readOnly = false)
 	public void insertDiaryRecord(PostForm form) {
 		Post diary = new Post(form.getUserName(), form.getCategoryId(), form.getDiaryDay(), form.getRecord1(),
@@ -27,19 +73,17 @@ public class PostRecordService {
 				form.getCreateAt());
 		PostMapper.insertDiaryRecord(diary);
 	}
-	
-	
-	
-	 @Transactional(readOnly = true)
-	    public PostForm findOneDiaryRecord(String userName,int categoryId,Date diaryDay) {
-	    	Post diary = PostMapper.findOneDiaryRecord(userName, categoryId, diaryDay);
-	    	if(Objects.isNull(diary)) {
-	    		return null;
-	    	}
-	    	PostForm form = new PostForm(diary.getUserName(),diary.getCategoryId(),diary.getDiaryDay(),
-	    			                                   diary.getRecord1(),diary.getRecord2(),diary.getRecord3(),
-	    			                                   diary.getImageName(),diary.getMemo(),diary.getCreateAt());
-	    	return form;
-	    	
-	    }
+
+	@Transactional(readOnly = true)
+	public PostForm findOneDiaryRecord(String userName, int categoryId, Date diaryDay) {
+		Post diary = PostMapper.findOneDiaryRecord(userName, categoryId, diaryDay);
+		if (Objects.isNull(diary)) {
+			return null;
+		}
+		PostForm form = new PostForm(diary.getUserName(), diary.getCategoryId(), diary.getDiaryDay(),
+				diary.getRecord1(), diary.getRecord2(), diary.getRecord3(), diary.getImageName(), diary.getMemo(),
+				diary.getCreateAt());
+		return form;
+
+	}
 }
