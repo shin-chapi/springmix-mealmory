@@ -2,8 +2,7 @@ package com.example.service;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
@@ -11,10 +10,15 @@ import java.util.UUID;
 
 import javax.imageio.ImageIO;
 
+import org.apache.commons.imaging.ImageReadException;
+import org.apache.commons.imaging.ImageWriteException;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
 
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.util.IOUtils;
@@ -30,6 +34,7 @@ public class FileUploadService {
 
 	public FileUploadService(AmazonS3 s3Client) {
 		this.s3Client = s3Client;
+		
 		
 	}
 
@@ -49,33 +54,48 @@ public class FileUploadService {
 	}
 
 	public String fileUpload(FileUploadForm fileUploadForm, String s3PathName, String fileName)
-			throws IOException {
+			throws IOException ,ImageWriteException,ImageReadException{
 		DateTimeFormatter fm = DateTimeFormatter.ofPattern("yyyy-MM-dd HH-mm-ss");
 
 		String extension = FilenameUtils.getExtension(fileUploadForm.getMultipartFile().getOriginalFilename())
 				.toLowerCase();
-		File uploadFile = new File(fileName);
+		
 		// 画像の新規アップロードはUUID,画像更新は何もしない
 		if (fileName == null) {
 			fileName = fileUploadForm.getCreateAt().format(fm) + " " + UUID.randomUUID() + "." + extension;
 		}
 
-		try (FileOutputStream uploadFileStream = new FileOutputStream(uploadFile)){
-    		byte[] bytes = fileUploadForm.getMultipartFile().getBytes();
-	        uploadFileStream.write(bytes);
+		
 
-			// メタデータ設定してS3へアップロード
-//			try (ByteArrayInputStream bis = new ByteArrayInputStream(uploadFileStream.toByteArray())) {
-//				ObjectMetadata metaData = new ObjectMetadata();
-//				byte[] size = uploadFileStream.toByteArray();
-//				metaData.setContentLength(size.length);
-
-				// S3の格納先オブジェクト名,ファイル名,inputStream,メタデータ
-				s3Client.putObject(s3PathName, fileName, uploadFile);
-			}
-			return fileName;
+	        try (ByteArrayOutputStream uploadFileStream = new ByteArrayOutputStream()){
+	        	//JpegイメージからEXIFメタデータを削除して、結果をストリームに書き込む
+	        	byte[] bytes = fileUploadForm.getMultipartFile().getBytes();
+//	        	exifRewriter.removeExifMetadata(bytes, uploadFileStream);
+	        	
+	        	//メタデータ設定してS3へアップロード
+	        	try(ByteArrayInputStream bis = new ByteArrayInputStream(uploadFileStream.toByteArray())){
+	        		ObjectMetadata metaData = new ObjectMetadata();
+	        		byte[] size = uploadFileStream.toByteArray();
+	        		metaData.setContentLength(size.length);
+	        		
+	        		//S3の格納先オブジェクト名,ファイル名,inputStream,メタデータ
+	            	s3Client.putObject(s3PathName, fileName, bis, metaData);
+	        	}	
+	        	return fileName;
+	        } catch (AmazonServiceException e) {
+	        	e.printStackTrace();
+	        	throw e;
+	        } catch (SdkClientException e){
+	        	e.printStackTrace();
+	        	throw e;
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	            throw e;
+	        }
+		}
 	 
-     } 
+     
+	
      
 	
 		

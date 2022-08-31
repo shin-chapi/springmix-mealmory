@@ -24,7 +24,7 @@ public class MainController {
 
 	private final FileUploadService fileUploadService;
 	
-	final static String s3Path = "springmix-Mealmory-image/PostRecord";
+	final static String s3Path = "salmon-springmix-mealmory";
 	
 //	private final static String localPath = "private/var/upload/";
 
