@@ -3,7 +3,7 @@
 	layout:decorate="~{layouts/common}" xmlns:th="http://www.thymeleaf.org">
 <head>
 
-<link rel='stylesheet' href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.2/main.min.css" />
+<link rel='stylesheet'/> <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.2/main.min.css" >
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.2/main.min.js'></script>
 	<script>
 	
@@ -15,9 +15,7 @@
 			events:  '/events/all'
 				
 		});
-		/* dayClick: function $(data) {
-			var date = moment(data).format('YYYY-MM-DD');
-            location.href = '/index/create?date=' + date;} */
+		
 		calendar.render();
 	});
 

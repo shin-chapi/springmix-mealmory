@@ -100,7 +100,7 @@ public class MainController {
 
 	
 	
-	@GetMapping("/index/record/{diaryDay}/{id}")
+	@GetMapping("index/record/{diaryDay}/{id}")
 	public String showUserEditContent(@AuthenticationPrincipal User details,
 			                          @PathVariable("id")int id,
 			                          @PathVariable("diaryDay")String diaryDay,
@@ -121,7 +121,7 @@ public class MainController {
 			model.addAttribute("exist", false);
 		}
 		
-		model.addAttribute("diaryRecordForm", form);
+		model.addAttribute("postform", form);
 		model.addAttribute("lists", PostRecordCategory.values());
 		return "post";
 	}

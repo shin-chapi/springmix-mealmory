@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// @formatter:off
         //アクセスポリシーの設定
         http.authorizeRequests()
-            .antMatchers("/login","/signup").permitAll()
+            .antMatchers("/login","/signup","/index").permitAll()
             .anyRequest().authenticated();
         	
         //ログイン設定
