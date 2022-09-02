@@ -40,15 +40,15 @@ public class PostRecordService {
 			switch (diary.getCategoryId()) {
 			case 1:
 				calendar.setUrl("/index/record/" + calendar.getStart() + "/1" );
-				calendar.setTitle("朝食" );
+				calendar.setTitle("朝食" + diary.getRecord2() );
 				break;
 			case 2:
 				calendar.setUrl("/index/record/" + calendar.getStart() + "/2" );
-				calendar.setTitle(  "昼食" );
+				calendar.setTitle(  "昼食" + diary.getRecord2() );
 				break;
 			case 3:
 				calendar.setUrl("/index/record/" + calendar.getStart() + "/3" );
-				calendar.setTitle( "夕食" );
+				calendar.setTitle( "夕食" + diary.getRecord2());
 				break;
 
 			}
