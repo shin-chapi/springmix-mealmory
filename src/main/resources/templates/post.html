@@ -11,8 +11,8 @@
 	<h2>食事記録編集</h2>
 
 	<div class="container">
-		<form th:action="@{/index/recoed/commit}" th:object="${postform}"
-			method="post" enctype="multipart/form-data">
+		<form id="category" th:action="@{/index/record/commit}" th:object="${postform}"
+			method="POST" enctype="multipart/form-data">
 			<div class="col-sm-6">
 				<div class="row card forms">
 					<div class="form-group">
@@ -26,7 +26,7 @@
 							th:errors="*{categoryId}" th:errorclass="error-messages"></div>
 						<div class="form-group">
 							<label for="diaryDay">日付</label> <input class="form-control"
-								type="date" id="diaryDay" name="diaryDay" th:value="*{diaryDay}">
+								type="date" th:field="*{diaryDay}" id="diaryDay" name="diaryDay" th:value="*{diaryDay}">
 							<div th:if="${#fields.hasErrors('diaryDay')}"
 								th:errors="*{diaryDay}" class="invalid-feedback"></div>
 						</div>
@@ -72,7 +72,7 @@
 						</div>
 						<div class="between-blocks">
 							<button class="btn btn-red" type="submit" id="delete"
-								name="delete" value="delete" onClick="return check()">削除する</button>
+								name="delete" value="delete" >削除する</button>
 							<button class="btn btn-green" type="submit" id="update"
 								name="update" value="update">更新する</button>
 						</div>

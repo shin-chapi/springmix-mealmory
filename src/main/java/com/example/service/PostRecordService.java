@@ -1,6 +1,7 @@
 package com.example.service;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,20 +36,19 @@ public class PostRecordService {
 			CalendarRecord calendar = new CalendarRecord();
 			calendar.setStart(simpleDate.format(diary.getDiaryDay()));
 			calendar.setEnd(simpleDate.format(diary.getDiaryDay()));
-			
-			
+
 			switch (diary.getCategoryId()) {
 			case 1:
-				calendar.setUrl("index/record/" + calendar.getStart() + "/1" );
-				calendar.setTitle("朝食" + diary.getRecord2() );
+				calendar.setUrl("index/record/" + calendar.getStart() + "/1");
+				calendar.setTitle("朝食" + diary.getRecord2());
 				break;
 			case 2:
-				calendar.setUrl("index/record/" + calendar.getStart() + "/2" );
-				calendar.setTitle(  "昼食" + diary.getRecord2() );
+				calendar.setUrl("index/record/" + calendar.getStart() + "/2");
+				calendar.setTitle("昼食" + diary.getRecord2());
 				break;
 			case 3:
-				calendar.setUrl("index/record/" + calendar.getStart() + "/3" );
-				calendar.setTitle( "夕食" + diary.getRecord2());
+				calendar.setUrl("index/record/" + calendar.getStart() + "/3");
+				calendar.setTitle("夕食" + diary.getRecord2());
 				break;
 
 			}
@@ -86,5 +86,23 @@ public class PostRecordService {
 				diary.getCreateAt());
 		return form;
 
+	}
+
+	@Transactional(readOnly = false)
+	public void updateDiaryRecord(PostForm form) {
+		Post diary = new Post(form.getUserName(), form.getCategoryId(), form.getDiaryDay(), form.getRecord1(),
+				form.getRecord2(), form.getRecord3(), form.getImageName(), form.getMemo(), form.getCreateAt(),
+				LocalDateTime.now());
+		PostMapper.updateDiaryRecord(diary);
+	}
+
+	@Transactional(readOnly = false)
+	public void deleteDiaryRecord(PostForm form) {
+		Post diary = new Post();
+		diary.setUserName(form.getUserName());
+		diary.setCategoryId(form.getCategoryId());
+		diary.setDiaryDay(form.getDiaryDay());
+		System.out.println(form.getDiaryDay());
+		PostMapper.deleteDiaryRecord(diary);
 	}
 }
