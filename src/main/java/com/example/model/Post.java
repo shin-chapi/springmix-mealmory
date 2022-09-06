@@ -23,13 +23,14 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String userName;
+	
+	public String userName;
 	
 	private int categoryId;
 
 	private Date diaryDay;
 
-	private String record1;
+	public String record1;
 
 	private String record2;
 

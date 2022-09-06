@@ -5,18 +5,33 @@
 
     <select id="findAllDiaryRecords" resultType="com.example.model.Post">
         SELECT
-            user_name,category_id,diary_day,record1,record2,record3
+            id as id, 
+            user_name as userName,
+            category_id as categoryId,
+            diary_day as diaryDay,
+            record1 as record1,
+            record2 as record2,
+            record3 as record3
         FROM
             post
         WHERE
-            username = #{userName}
+            user_name = #{userName}
         ORDER BY
-            diaryday,categoryid
+            diary_day,category_id
     </select>
 
     <select id="findOneDiaryRecord" resultType="com.example.model.Post">
         SELECT
-            user_name,category_id,diary_day,record1,record2,record3,image_name,memo,create_at,update_at
+            user_name as userName,
+            category_id as caregoryId,
+            diary_day as diaryDay,
+            record1 as record1,
+            record2 as record2,
+            record3 as record3,
+            image_name as imageName,
+            memo as memo,
+            create_at as createAt,
+            update_at as updateAt
         FROM
             post
         WHERE
@@ -41,7 +56,7 @@
             #{updateAt})
     </insert>
     
-    <update id="updateDiaryRecord" parameterType="com.example.model.Post">
+    <update id="updateDiaryRecord" parameterType="com.example.model.Post" >
         UPDATE
             post
         SET
@@ -56,7 +71,8 @@
             update_at = #{updateAt}
         WHERE 
             user_name = #{userName}
-        AND create_at = #{createAt}
+        AND 
+            diary_day = #{diaryDay}
     </update>
     
     <delete id="deleteDiaryRecord">
