@@ -134,8 +134,8 @@ public class MainController {
 			return "post";
 		}
 
-		PostForm exist = postRecordService.findOneDiaryRecord(details.getUsername(), form.getCategoryId(),
-				form.getDiaryDay());
+//		PostForm exist = postRecordService.findOneDiaryRecord(details.getUsername(), form.getCategoryId(),
+//				form.getDiaryDay());
 //		if (exist != null && !exist.getCreateAt().equals(form.getCreateAt())) {
 //			model.addAttribute("lists", PostRecordCategory.values());
 //			model.addAttribute("message", "既に同じカテゴリ、同じ日付で登録されています");
@@ -158,6 +158,7 @@ public class MainController {
 
 		form.setUserName(details.getUsername());
 		form.setImageName(imageName);
+		form.setCreateAt(form.getCreateAt());
 		postRecordService.updateDiaryRecord(form);
 		return "redirect:/calendar";
 	}

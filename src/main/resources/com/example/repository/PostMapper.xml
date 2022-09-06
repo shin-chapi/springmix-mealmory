@@ -71,7 +71,8 @@
             update_at = #{updateAt}
         WHERE 
             user_name = #{userName}
-        AND create_at = #{createAt}
+        AND 
+            diary_day = #{diaryDay}
     </update>
     
     <delete id="deleteDiaryRecord">
