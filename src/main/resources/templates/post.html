@@ -2,18 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layouts/common}">
-<link rel="stylesheet" th:href="css/app.css">
-<link rel="stylesheet" th:href="css/fullcalendar.css">
-<script src="js/app.js" type="application/javascript" defer></script>
+
 
 <section layout:fragment="content">
 
 	<h2>食事記録編集</h2>
 
 	<div class="container">
-		<form id="category" th:action="@{/index/record/commit}" th:object="${postform}"
+		<form class="row" id="category" th:action="@{/index/record/commit}" 
 			method="POST" enctype="multipart/form-data">
-			<div class="col-sm-6">
+			<div class="col-sm-6" th:object="${postform}">
 				<div class="row card forms">
 					<div class="form-group">
 						<label for="cateogryId">カテゴリ</label> <select class="form-control"
@@ -71,9 +69,9 @@
 							<p class="error-messages" th:text="${message}"></p>
 						</div>
 						<div class="between-blocks">
-							<button class="btn btn-red" type="submit" id="delete"
+							<button class="btn w-50 btn-outline-dark" type="submit" id="delete"
 								name="delete" value="delete" >削除する</button>
-							<button class="btn btn-green" type="submit" id="update"
+							<button class="btn w-50 btn-outline-dark" type="submit" id="update"
 								name="update" value="update">更新する</button>
 						</div>
 					</div>
@@ -83,7 +81,7 @@
 				<img th:src="${image}" style="width: 100%; height: auto;" /><br>
 			</div>
 		</form>
-		<a th:href="@{/calendar}">カレンダーへ戻る</a><br> <br>
+		<a class="btn w-55 btn-outline-dark" th:href="@{/calendar}">カレンダーへ戻る</a><br> <br>
 	</div>
 
 

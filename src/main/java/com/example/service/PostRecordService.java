@@ -102,7 +102,6 @@ public class PostRecordService {
 		diary.setUserName(form.getUserName());
 		diary.setCategoryId(form.getCategoryId());
 		diary.setDiaryDay(form.getDiaryDay());
-		System.out.println(form.getDiaryDay());
 		PostMapper.deleteDiaryRecord(diary);
 	}
 }
