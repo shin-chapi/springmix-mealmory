@@ -10,9 +10,12 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.example.form.validation.ConfirmDiaryRecord;
+
 import lombok.Data;
 
 @Data
+@ConfirmDiaryRecord(records = {"record1","record2","record3"})
 public class PostForm {
 
 	private String userName;

@@ -13,8 +13,11 @@
 			method="POST" enctype="multipart/form-data">
 			<div class="col-sm-6" th:object="${postform}">
 				<div class="row card forms">
+				
 					<div class="form-group">
-						<label for="cateogryId">カテゴリ</label> <select class="form-control"
+					
+						<label for="cateogryId">カテゴリ</label>
+						 <select class="form-control"
 							id="categoryId" name="categoryId">
 							<option th:each="list:${lists}" th:value="${list.categoryId}"
 								th:text="${list.categoryName}"
@@ -22,20 +25,22 @@
 						</select>
 						<div th:if="${#fields.hasErrors('categoryId')}"
 							th:errors="*{categoryId}" th:errorclass="error-messages"></div>
+							
 						<div class="form-group">
 							<label for="diaryDay">日付</label> <input class="form-control"
 								type="date" th:field="*{diaryDay}" id="diaryDay" name="diaryDay" th:value="*{diaryDay}">
 							<div th:if="${#fields.hasErrors('diaryDay')}"
 								th:errors="*{diaryDay}" class="invalid-feedback"></div>
 						</div>
+						
 						<div class="form-group">
 							<label for="record1"> <span>主食</span>
-
 							</label> <input class="form-control" type="text" id="record1"
 								name="record1" th:field="*{record1}">
 							<div th:if="${#fields.hasErrors('record1')}"
 								th:errors="*{record1}" th:errorclass="error-messages"></div>
 						</div>
+						
 						<div class="form-group">
 							<label for="record2"> <span>主菜</span>
 							</label> <input class="form-control" type="text" id="record2"
@@ -43,37 +48,41 @@
 							<div th:if="${#fields.hasErrors('record2')}"
 								th:errors="*{record2}" th:errorclass="error-messages"></div>
 						</div>
+						
 						<div class="form-group">
 							<label for="record3"> <span>副菜</span>
-
 							</label> <input class="form-control" type="text" id="record3"
 								name="record3" th:field="*{record3}">
 							<div th:if="${#fields.hasErrors('record3')}"
 								th:errors="*{record3}" th:errorclass="error-messages"></div>
 						</div>
+						
 						<div class="form-group">
 							<label for="price">メモ</label>
 							<textarea class="form-control" id="memo" name="memo"
 								th:field="*{memo}" placeholder="1~100文字以内でメモを記入してください"></textarea>
 							<div th:if="${#fields.hasErrors('memo')}" th:errors="*{memo}"
 								th:errorclass="error-messages"></div>
-						</div>
+						</div>						
 						<div>
 							<input type="hidden" id="createAt" name="createAt"
 								th:field="*{createAt}">
 						</div>
+						
 						<div th:object="${fileUploadForm}">
 							<input type="file" th:field="*{multipartFile}">
 							<div th:if="${#fields.hasErrors('multipartFile')}"
 								th:errors="*{multipartFile}" th:errorclass="error-messages"></div>
 							<p class="error-messages" th:text="${message}"></p>
 						</div>
+						
 						<div class="between-blocks">
 							<button class="btn w-50 btn-outline-dark" type="submit" id="delete"
 								name="delete" value="delete" >削除する</button>
 							<button class="btn w-50 btn-outline-dark" type="submit" id="update"
 								name="update" value="update">更新する</button>
 						</div>
+						
 					</div>
 				</div>
 			</div>

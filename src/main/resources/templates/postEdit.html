@@ -25,7 +25,7 @@
 							<label for="diaryDay">日付</label> <input class="form-control"
 								type="date" id="diaryDay" name="diaryDay" th:value="*{diaryDay}">
 							<div th:if="${#fields.hasErrors('diaryDay')}"
-								th:errors="*{diaryDay}" class="invalid-feedback"></div>
+								th:errors="*{diaryDay}" th:errorclass="error-messages"></div>
 						</div>
 						<div class="form-group">
 							<label for="record1"> <span>主食</span>
