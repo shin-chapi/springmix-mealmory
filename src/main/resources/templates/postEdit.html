@@ -9,13 +9,13 @@
 	<h2>食事記録登録</h2>
 
 	<div class="container">
-		<form th:action="@{/edit}" th:object="${postform}" method="post"
+		<form th:action="@{/edit}"  method="post"
 			enctype="multipart/form-data">
-			<div class="col-sm-6">
+			<div class="col-sm-6" th:object="${postform}" >
 				<div class="row card forms">
 					<div class="form-group">
 						<label for="cateogryId">カテゴリ</label> <select class="form-control"
-							id="categoryId" name="categoryId">
+							id="categoryId" name="categoryId"  v-model="vueId">
 							<option th:each="list:${lists}" th:value="${list.categoryId}"
 								th:text="${list.categoryName}"></option>
 						</select>
@@ -62,7 +62,7 @@
 								th:field="*{createAt}">
 						</div>
 						<div th:object="${fileUploadForm}">
-							<input type="file" th:field="*{multipartFile}">
+							<input type="file" th:field="*{multipartFile}" v-on:change="uploads">
 							<div th:if="${#fields.hasErrors('multipartFile')}"
 								th:errors="*{multipartFile}" th:errorclass="error-messages"></div>
 							<p class="error-messages" th:text="${message}"></p>
@@ -76,7 +76,7 @@
 		</form>
 		<a class="btn w-55 btn-outline-dark"th:href="@{/calendar}">カレンダーへ戻る</a><br> <br>
 	</div>
-
+<script th:src="@{/js/createDiaryRecord.js}"></script>
 
 
 </section>
