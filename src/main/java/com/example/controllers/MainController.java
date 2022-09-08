@@ -100,9 +100,11 @@ public class MainController {
 	}
 
 	@GetMapping("index/record/{diaryDay}/{id}")
-	public String showUserEditContent(@AuthenticationPrincipal User details, @PathVariable("id") int id,
-			@PathVariable("diaryDay") String diaryDay, @ModelAttribute("fileUploadForm") FileUploadForm file,
-			Model model) throws Exception {
+	public String showUserEditContent(@AuthenticationPrincipal User details, 
+									  @PathVariable("id") int id,
+			                          @PathVariable("diaryDay") String diaryDay, 
+			                          @ModelAttribute("fileUploadForm") FileUploadForm file,Model model) throws Exception {
+		
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date parsedDate = format.parse(diaryDay);
 
@@ -113,11 +115,13 @@ public class MainController {
 
 		if (form.getImageName() != null) {
 			String src = fileUploadService.fileDownload(s3Path, form.getImageName());
+			model.addAttribute("multipartFile",form.getImageName());
 			model.addAttribute("exist", true);
 			model.addAttribute("image", "data:image/jpg;base64," + src);
 		} else {
 			model.addAttribute("exist", false);
 		}
+		System.out.println(form.getImageName());
 
 		model.addAttribute("postform", form);
 		model.addAttribute("lists", PostRecordCategory.values());

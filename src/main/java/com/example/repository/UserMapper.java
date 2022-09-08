@@ -12,4 +12,6 @@ public interface UserMapper {
 	public User identifyMail(String mail);
 	
 	public void registerUser(User user);
+	
+	void deleteUser(String userName);
 }

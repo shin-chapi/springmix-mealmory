@@ -11,11 +11,11 @@
 		SELECT id,
 		name,
 		password,
-		mail,
+		mail
 
-		FROM user
+		FROM "users"
 		
-		where name = #{name}
+		where name = #{name};
 		
 		
 	</select>
@@ -27,9 +27,9 @@
 		SELECT id,
 		name,
 		password,
-		mail,
+		mail
 
-		FROM user
+		FROM "users"
 		
 		where mail = #{mail}
 		
@@ -48,7 +48,7 @@
 
 
 	<insert id="registerUser">
-		INSERT INTO user
+		INSERT INTO "users"
 		(
 		name,
 		password,
@@ -64,5 +64,14 @@
 		)
 
 	</insert>
+	
+	
+	<delete id = "deleteUser" parameterType = "String">
+        DELETE
+        FROM
+            "users"
+        WHERE
+            name = #{name}
+    </delete>
 
 </mapper>

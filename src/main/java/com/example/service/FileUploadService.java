@@ -94,10 +94,6 @@ public class FileUploadService {
 	            throw e;
 	        }
 		}
-	 
-     
-	
-     
 	
 		
 	
