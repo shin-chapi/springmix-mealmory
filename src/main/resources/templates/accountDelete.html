@@ -1,0 +1,39 @@
+<!doctype html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+     xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{layouts/common}">
+<section layout:fragment="content">
+	
+	
+	
+	
+	
+	
+	
+	<h2>アカウント削除確認</h2>
+<div class="container">
+	<span class="danger">削除すると、以下の情報が全て削除されます</span>
+	<ul>
+	    <li>アカウント情報</li>
+	    <li>食事記録</li>
+	</ul>
+	<form th:action="@{/index/mypage/confirm/delete}" method="post" th:object="${ConfirmDelete}">
+	    <div>
+		    <button class="btn btn-red" type="submit" onClick="return deleteAccount()">削除する</button>
+		</div>
+	    <div>
+	        <input type="hidden"  name="name" th:value="*{name}">    
+	        　</div>
+	</form>
+	<a th:href="@{/mypage}">マイページへ戻る</a><br>
+	<a th:href="@{/index/mypage/changepassword}">パスワードを変更する</a><br><br>
+</div>
+
+<script th:src="@{/js/deleteCheck.js}"></script>
+	
+	
+	
+	
+	
+
+</section>

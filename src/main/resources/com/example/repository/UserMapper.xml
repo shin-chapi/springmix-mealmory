@@ -64,5 +64,14 @@
 		)
 
 	</insert>
+	
+	
+	<delete id = "deleteUser" parameterType = "String">
+        DELETE
+        FROM
+            user
+        WHERE
+            name = #{name}
+    </delete>
 
 </mapper>
