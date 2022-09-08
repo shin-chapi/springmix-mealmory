@@ -13,7 +13,7 @@
             record2 as record2,
             record3 as record3
         FROM
-            post
+            posts
         WHERE
             user_name = #{userName}
         ORDER BY
@@ -33,7 +33,7 @@
             create_at as createAt,
             update_at as updateAt
         FROM
-            post
+            posts
         WHERE
             user_name = #{userName}
         AND category_id = #{categoryId}
@@ -42,7 +42,7 @@
     
     <insert id="insertDiaryRecord">
         INSERT INTO
-            post(user_name,category_id,diary_day,record1,record2,record3,image_name,memo,create_at,update_at)
+            posts(user_name,category_id,diary_day,record1,record2,record3,image_name,memo,create_at,update_at)
         VALUES
            (#{userName},
             #{categoryId},
@@ -58,7 +58,7 @@
     
     <update id="updateDiaryRecord" parameterType="com.example.model.Post" >
         UPDATE
-            post
+            posts
         SET
             user_name = #{userName},
             category_id = #{categoryId},
@@ -78,7 +78,7 @@
     <delete id="deleteDiaryRecord">
         DELETE
         FROM
-            post
+            posts
         WHERE
             user_name = #{userName}
         AND category_id = #{categoryId}
