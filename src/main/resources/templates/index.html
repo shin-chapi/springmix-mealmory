@@ -1,24 +1,12 @@
 <!doctype html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+     xmlns:th="http://www.thymeleaf.org"
 	layout:decorate="~{layouts/common}">
 <section layout:fragment="content">
 	<div class="col-lg-8 offset-lg-2 text-center">
-		<h1>MEALMORY</h1>
-		<h2>Record your meal</h2>
-		<p class="lead">
-			普段の食事を記録するアプリ<br />
-		</p>
+		<h1>MyPage</h1>
 	</div>
-	<div class="d-none d-lg-block d-xl-block d-xxl-block">
-		<div class="row justify-content-center">
-			<div class="col-5">
-				<a class="btn w-100 btn-outline-light" href="/signup">Sign up</a>
-			</div>
-			<div class="col-5">
-				<a class="btn w-100 btn-outline-light" href="/login">Log in</a>
-			</div>
-		</div>
-	</div>
-
+	
+<a class="btn w-55 btn-outline-dark" th:href="@{/calendar}">カレンダーへ戻る</a><br> <br>
 
 </section>
