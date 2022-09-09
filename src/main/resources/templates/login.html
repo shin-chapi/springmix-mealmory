@@ -6,27 +6,26 @@
 		<h1>MEALMORY</h1>
 		<h2>Record your meal</h2>
 		
-		<p class="lead">
-			普段の食事を記録するアプリ<br />
-		</p>
+		
 		
 	</div>
 	<div class="d-none d-lg-block d-xl-block d-xxl-block">
 		<div class="row justify-content-center">
 		
 		　<form th:action="@{/calendar}" method="post">
-		
-			<label for="userId">ユーザーID</label>
-			<input type="text" name="username" placeholder="ユーザーID" size="20"  />
-		
-			<label for="password">パスワード</label>
-			<input type="password" name="password"  placeholder="パスワード" size="20" />
+		 <div class="mb-3">
+			 <label for="exampleInputName" class="form-label">ユーザーID</label>
+			<input type="text" name="name"class="form-control"  placeholder="ユーザーID"   />
+			</div>
+		<div class="mb-3">
+			<label for="exampleInputPassword1" class="form-label">パスワード</label>
+			<input type="password" name="password" class="form-control" placeholder="パスワード"  />
 			
 			<p th:if="${session['SPRING_SECURITY_LAST_EXCEPTION']} != null"
 				th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"
 				class="text-danger"> </p>
 				
-				
+				 </div>
 			<div class="col-15">
 				<input type="submit" class="btn w-100 btn-outline-dark" value=Login>
 			</div>
