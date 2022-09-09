@@ -1,8 +1,9 @@
+
 var getId = document.getElementById('categoryId').value;
 var category = {
 	data() {
 		return {
-			vueId: getId,
+			vueId:getId,
 			disabled: false
 		}
 	},

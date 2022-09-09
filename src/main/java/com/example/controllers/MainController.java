@@ -121,7 +121,6 @@ public class MainController {
 		} else {
 			model.addAttribute("exist", false);
 		}
-		System.out.println(form.getImageName());
 
 		model.addAttribute("postform", form);
 		model.addAttribute("lists", PostRecordCategory.values());
@@ -138,13 +137,13 @@ public class MainController {
 			return "post";
 		}
 
-//		PostForm exist = postRecordService.findOneDiaryRecord(details.getUsername(), form.getCategoryId(),
-//				form.getDiaryDay());
-//		if (exist != null && !exist.getCreateAt().equals(form.getCreateAt())) {
-//			model.addAttribute("lists", PostRecordCategory.values());
-//			model.addAttribute("message", "既に同じカテゴリ、同じ日付で登録されています");
-//			return "post";
-//		}
+		PostForm exist = postRecordService.findOneDiaryRecord(details.getUsername(), form.getCategoryId(),
+				form.getDiaryDay());
+		if (exist != null && !exist.getCreateAt().equals(form.getCreateAt())) {
+			model.addAttribute("lists", PostRecordCategory.values());
+			model.addAttribute("message", "既に同じカテゴリ、同じ日付で登録されています");
+			return "post";
+		}
 
 		String imageName = form.getImageName();
 		LocalDateTime dateTime = form.getCreateAt();
