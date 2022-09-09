@@ -9,16 +9,17 @@
 		
 		
 	</div>
-	<div class="d-none d-lg-block d-xl-block d-xxl-block">
-		<div class="row justify-content-center">
+	<div class="row p-form-top ">
+		<div class="col">
 		
 		　<form th:action="@{/calendar}" method="post">
 		 <div class="mb-3">
-			 <label for="exampleInputName" class="form-label">ユーザーID</label>
+			 <label for="exampleInputName" class="form-label">userID</label>
 			<input type="text" name="name"class="form-control"  placeholder="ユーザーID"   />
 			</div>
+			
 		<div class="mb-3">
-			<label for="exampleInputPassword1" class="form-label">パスワード</label>
+			<label for="exampleInputPassword1" class="form-label">password</label>
 			<input type="password" name="password" class="form-control" placeholder="パスワード"  />
 			
 			<p th:if="${session['SPRING_SECURITY_LAST_EXCEPTION']} != null"
