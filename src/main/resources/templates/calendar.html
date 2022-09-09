@@ -3,23 +3,24 @@
 	layout:decorate="~{layouts/common}" xmlns:th="http://www.thymeleaf.org">
 <head>
 
-<link rel='stylesheet'/> <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.2/main.min.css" >
-  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.2/main.min.js'></script>
-	<script>
-	
+<link rel='stylesheet' />
+<link
+	href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.2/main.min.css">
+<script
+	src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.2/main.min.js'></script>
+<script>
 	document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {
-			initialView : 'dayGridMonth', 
-			locale: 'ja',
-			events:  '/events/all'
-				
+			initialView : 'dayGridMonth',
+			locale : 'ja',
+			events : '/events/all',
+
 		});
-		
+
 		calendar.render();
 	});
-
-    </script>
+</script>
 </head>
 
 <section layout:fragment="content">
@@ -27,17 +28,17 @@
 		<h1>Calender</h1>
 	</div>
 	<div>
-		
-		<form role="form" id="logout" th:action="@{/logout}" method="post">
-			<button type="submit" class="btn w-55 btn-outline-dark" >Logout</button>
 
-		</form>
+		<a th:value="logout" th:href="@{/logout}"
+			class="btn w-55 btn-outline-dark">Logout</a>
+
+
 	</div>
-	<form role="form"  th:action="@{/create}" method="post">
-			<button type="submit" class="btn w-55 btn-outline-dark" >Newpost</button>
+	<form role="form" th:action="@{/create}" method="post">
+		<button type="submit" class="btn w-55 btn-outline-dark">Newpost</button>
 
-		</form>
-	
+	</form>
+
 	<div id='calendar'></div>
 </section>
 

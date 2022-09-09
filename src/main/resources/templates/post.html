@@ -21,11 +21,12 @@
 							id="categoryId" name="categoryId"  >
 						
 							
-							 <option th:each="list:${lists}" 
+							 <option th:disabled="${list.categoryId != id}"
+							 th:each="list:${lists}" 
 							        th:value="${list.categoryId}" 
 								   th:text="${list.categoryName}"
 								   
-								    th:selected="${list.categoryId == id}" > </option>
+								    th:selected="${list.categoryId == id}"  > </option>
 								
 						</select>
 						<div th:if="${#fields.hasErrors('categoryId')}"
@@ -33,7 +34,8 @@
 							
 						<div class="form-group">
 							<label for="diaryDay">日付</label> 
-							<input class="form-control"	type="date" th:field="*{diaryDay}"   name="diaryDay" th:value="*{diaryDay}" >
+							<input class="form-control"	type="date" th:field="*{diaryDay}"   name="diaryDay" th:value="*{diaryDay}" 
+							th:disable="${diaryDay == diaryDay}">
 							<div th:if="${#fields.hasErrors('diaryDay')}"
 								th:errors="*{diaryDay}" class="invalid-feedback"></div>
 						</div>

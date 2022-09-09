@@ -10022,3 +10022,10 @@ h3 {
 body {
   padding-top: 5rem;
 }
+
+.error-messages {
+    color: red;
+    display: block;
+    padding-left: 5px;
+    overflow-x: auto;
+}
