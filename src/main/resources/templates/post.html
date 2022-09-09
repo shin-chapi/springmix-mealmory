@@ -16,12 +16,17 @@
 				
 					<div class="form-group">
 					
-						<label for="cateogryId">カテゴリ</label>
+						<label for="categoryId">カテゴリ</label>
 						 <select class="form-control"  
-							id="categoryId" name="categoryId">
-							<option th:each="list:${lists}" th:value="${list.categoryId}"
-								th:text="${list.categoryName}"
-								th:selected="${list.categoryId} == *{categoryId}"></option>
+							id="categoryId" name="categoryId"  >
+						
+							
+							 <option th:each="list:${lists}" 
+							        th:value="${list.categoryId}" 
+								   th:text="${list.categoryName}"
+								   
+								    th:selected="${list.categoryId == id}" > </option>
+								
 						</select>
 						<div th:if="${#fields.hasErrors('categoryId')}"
 							th:errors="*{categoryId}" th:errorclass="error-messages"></div>
@@ -70,7 +75,7 @@
 						</div>
 						
 						<div th:object="${fileUploadForm}">
-							<input type="file" th:field="*{multipartFile}" >
+							<input type="file" th:field="*{multipartFile}" v-on:change="uploads" v-on:click="doDisabled" >
 							<div th:if="${#fields.hasErrors('multipartFile')}"
 								th:errors="*{multipartFile}" th:errorclass="error-messages"></div>
 							<p class="error-messages" th:text="${message}"></p>
@@ -78,7 +83,7 @@
 						
 						<div class="between-blocks">
 							<button class="btn w-50 btn-outline-dark" type="submit" id="delete"
-								name="delete" value="delete"  onClick="return check()" >削除する</button>
+								name="delete" value="delete"  onClick="return check()"  >削除する</button>
 							<button class="btn w-50 btn-outline-dark" type="submit" id="update"
 								name="update" value="update">更新する</button>
 						</div>
