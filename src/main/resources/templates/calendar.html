@@ -34,10 +34,13 @@
 
 
 	</div>
-	<form role="form" th:action="@{/create}" method="post">
-		<button type="submit" class="btn w-55 btn-outline-dark">Newpost</button>
+	<div>
 
-	</form>
+		<a th:value="create" th:href="@{/create}"
+			class="btn w-55 btn-outline-dark">Newpost</a>
+
+	</div>
+	
 
 	<div id='calendar'></div>
 </section>

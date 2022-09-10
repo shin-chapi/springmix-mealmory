@@ -46,7 +46,7 @@ public class MainController {
 		return "post";
 	}
 
-	@PostMapping("/create")
+	@GetMapping("/create")
 	public String create(@ModelAttribute("postform") PostForm postform,
 			@ModelAttribute("fileUploadForm") FileUploadForm file, Model model) {
 		model.addAttribute("lists", PostRecordCategory.values());
