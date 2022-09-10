@@ -73,6 +73,8 @@
             user_name = #{userName}
         AND 
             diary_day = #{diaryDay}
+        AND 
+            category_id = #{categoryId}
     </update>
     
     <delete id="deleteDiaryRecord">
@@ -81,8 +83,10 @@
             posts
         WHERE
             user_name = #{userName}
-        AND category_id = #{categoryId}
-        AND diary_day = #{diaryDay}
+        AND 
+            category_id = #{categoryId}
+        AND 
+            diary_day = #{diaryDay}
     </delete>
 
 </mapper>
