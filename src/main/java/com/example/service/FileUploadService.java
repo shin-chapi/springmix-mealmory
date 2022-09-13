@@ -55,9 +55,9 @@ public class FileUploadService {
 	}
 
 	public String fileUpload(FileUploadForm fileUploadForm, String s3PathName, String fileName)
-			throws IOException ,ImageWriteException,ImageReadException{
+			                 throws IOException ,ImageWriteException,ImageReadException{
+		
 		DateTimeFormatter fm = DateTimeFormatter.ofPattern("yyyy-MM-dd HH-mm-ss");
-
 		String extension = FilenameUtils.getExtension(fileUploadForm.getMultipartFile().getOriginalFilename())
 				.toLowerCase();
 		
@@ -65,9 +65,6 @@ public class FileUploadService {
 		if (fileName == null) {
 			fileName = fileUploadForm.getCreateAt().format(fm) + " " + UUID.randomUUID() + "." + extension;
 		}
-
-		
-
 	        try (ByteArrayOutputStream uploadFileStream = new ByteArrayOutputStream()){
 	        	//JpegイメージからEXIFメタデータを削除して、結果をストリームに書き込む
 	        	byte[] bytes = fileUploadForm.getMultipartFile().getBytes();
@@ -94,9 +91,6 @@ public class FileUploadService {
 	            throw e;
 	        }
 		}
-	
-		
-	
 
 	public String fileDownload(String bucketName, String objectName) {
 		S3Object s3Object = s3Client.getObject(bucketName, objectName);

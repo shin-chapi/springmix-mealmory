@@ -32,8 +32,6 @@ public class MainController {
 
 	final static String s3Path = "salmon-springmix-mealmory";
 
-
-
 	public MainController(PostRecordService postRecordService, FileUploadService fileUploadService) {
 		this.postRecordService = postRecordService;
 		this.fileUploadService = fileUploadService;
@@ -47,31 +45,37 @@ public class MainController {
 	}
 
 	@GetMapping("/create")
-	public String create(@ModelAttribute("postform") PostForm postform,
-			@ModelAttribute("fileUploadForm") FileUploadForm file, Model model) {
-		model.addAttribute("lists", PostRecordCategory.values());
-		return "postEdit";
+	public String postCreate(@ModelAttribute("postform") PostForm postform,
+			                 @ModelAttribute("fileUploadForm") FileUploadForm file,
+			                 Model model) {
+		
+		 model.addAttribute("lists", PostRecordCategory.values());
+		 return "postEdit";
 	}
 
 	@PostMapping("/edit")
-	public String edit(@AuthenticationPrincipal User details, @ModelAttribute("postform") @Validated PostForm postform,
-			BindingResult bindingResult, @ModelAttribute("fileUploadForm") @Validated FileUploadForm file,
-			BindingResult resultFile, Model model) throws Exception {
+	public String postEdit(@AuthenticationPrincipal User details, 
+			               @ModelAttribute("postform")       @Validated PostForm postform,  BindingResult bindingResult, 
+			               @ModelAttribute("fileUploadForm") @Validated FileUploadForm file,BindingResult resultFile, 
+			               Model model) throws Exception {
 
 		// 入力チェック結果
 		if (bindingResult.hasErrors() || resultFile.hasErrors()) {
 			model.addAttribute("lists", PostRecordCategory.values());
 			System.out.println(bindingResult);
+			
 			// NG:ユーザー登録画面に戻ります
 			return "postEdit";
 
 		}
 
-		PostForm exist = postRecordService.findOneDiaryRecord(details.getUsername(), postform.getCategoryId(),
-				postform.getDiaryDay());
+		PostForm exist = postRecordService.findOneDiaryRecord(details.getUsername(),  
+				                                              postform.getCategoryId(),
+				                                              postform.getDiaryDay());
 		if (exist != null) {
 			model.addAttribute("lists", PostRecordCategory.values());
 			model.addAttribute("message", "既に同じカテゴリ、同じ日付で登録されています");
+			
 			return "postEdit";
 		}
 
@@ -80,31 +84,38 @@ public class MainController {
 		if (file == null) {
 			System.out.println("nullです");
 		}
+		
 		// ファイルが空でない場合に、ファイルの中身をチェックする
 		if (!file.getMultipartFile().isEmpty()) {
+			//ファイルバリデーション
 			if (fileUploadService.fileValid(file)) {
 				file.setCreateAt(dateTime);
+				//画像データをAmazonS3に保存
 				imageName = fileUploadService.fileUpload(file, s3Path, null);
 			} else {
 				model.addAttribute("lists", PostRecordCategory.values());
 				model.addAttribute("message", "ファイル形式が不正です");
+				
 				return "postEdit";
 			}
 		}
 		postform.setUserName(details.getUsername());
 		postform.setCreateAt(dateTime);
+		//データベースにはファイル名を保存
 		postform.setImageName(imageName);
 		postRecordService.insertDiaryRecord(postform);
 
 		return "calendar";
 	}
-
+	
+	//ユーザーIDと日時から投稿を検索して表示を返す
 	@GetMapping("index/record/{diaryDay}/{id}")
-	public String showUserEditContent(@AuthenticationPrincipal User details, 
-									  @PathVariable("id") int id,
-			                          @PathVariable("diaryDay") String diaryDay, 
-			                          @ModelAttribute("fileUploadForm") FileUploadForm file,Model model) throws Exception {
-		
+	public String showUserEditPost(@AuthenticationPrincipal User details,  
+			                       @PathVariable("id") int id,
+			                       @PathVariable("diaryDay") String diaryDay, 
+			                       @ModelAttribute("fileUploadForm") FileUploadForm file,
+			                           Model model) throws Exception {
+
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date parsedDate = format.parse(diaryDay);
 
@@ -115,30 +126,35 @@ public class MainController {
 
 		if (form.getImageName() != null) {
 			String src = fileUploadService.fileDownload(s3Path, form.getImageName());
-			model.addAttribute("multipartFile",form.getImageName());
+			//画像ファイルをアップロードフォームに差し込み　
+			model.addAttribute("multipartFile", form.getImageName());
 			model.addAttribute("exist", true);
 			model.addAttribute("image", "data:image/jpg;base64," + src);
 		} else {
 			model.addAttribute("exist", false);
 		}
-
-		model.addAttribute("postform", form);
-		model.addAttribute("lists", PostRecordCategory.values());
-		return "post";
+		    model.addAttribute("postform", form);
+		    model.addAttribute("lists", PostRecordCategory.values());
+		    
+		    return "post";
 	}
-
+	
+	//投稿を更新
 	@RequestMapping(value = "/index/record/commit", method = RequestMethod.POST, params = "update")
-	public String updateContent(@AuthenticationPrincipal User details,
-			@ModelAttribute("postform") @Validated PostForm form, BindingResult resultForm,
-			@ModelAttribute("fileUploadForm") @Validated FileUploadForm file, BindingResult resultFile, Model model)
-			throws Exception {
+	public String updatePost(@AuthenticationPrincipal User details,
+			                    @ModelAttribute("postform") @Validated PostForm form, BindingResult resultForm,
+			                    @ModelAttribute("fileUploadForm") @Validated FileUploadForm file, BindingResult resultFile, 
+			                    Model model)throws Exception {
+		 
 		if (resultForm.hasErrors() || resultFile.hasErrors()) {
 			model.addAttribute("lists", PostRecordCategory.values());
 			return "post";
 		}
 
-		PostForm exist = postRecordService.findOneDiaryRecord(details.getUsername(), form.getCategoryId(),
-				form.getDiaryDay());
+		PostForm exist = postRecordService.findOneDiaryRecord(details.getUsername(), 
+				   										      form.getCategoryId(),
+				   										      form.getDiaryDay());
+		
 		if (exist != null && !exist.getCreateAt().equals(form.getCreateAt())) {
 			model.addAttribute("lists", PostRecordCategory.values());
 			model.addAttribute("message", "既に同じカテゴリ、同じ日付で登録されています");
@@ -165,10 +181,12 @@ public class MainController {
 		postRecordService.updateDiaryRecord(form);
 		return "redirect:/calendar";
 	}
-
+	
+	//投稿を削除
 	@RequestMapping(value = "/index/record/commit", method = RequestMethod.POST, params = "delete")
-	public String deleteContent(@AuthenticationPrincipal User details,
-			@ModelAttribute("postform") PostForm form) {
+	public String deletePost(@AuthenticationPrincipal User details, 
+			  				 @ModelAttribute("postform") PostForm form) {
+		
 		form.setUserName(details.getUsername());
 		postRecordService.deleteDiaryRecord(form);
 		return "redirect:/calendar";

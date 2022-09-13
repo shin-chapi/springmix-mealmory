@@ -26,16 +26,13 @@ public class AccountController {
 	}
 	
 	@GetMapping("/mypage")
-	public String showIndexMyPage(@AuthenticationPrincipal User details,
-			                                                Model model) {
-		
-		
-		
+	public String indexUserPage(@AuthenticationPrincipal User details,
+			                    Model model) {
 		return "index";
 	}
-	
+	//ユーザーを編集
 	@GetMapping("/index/mypage/confirm")
-	public String showConfirmPage(@AuthenticationPrincipal User details,
+	public String confirmUserPage(@AuthenticationPrincipal User details,
 			                      Model model) {
 		SignupForm form = new SignupForm();
 		form.setName(details.getUsername());
@@ -43,8 +40,9 @@ public class AccountController {
 		return "accountDelete";
 	}
 	
+	//ユーザーを削除
 	@PostMapping("/index/mypage/confirm/delete")
-	public String deleteAccount(@ModelAttribute("AccountInfoForm") User form,
+	public String deleteUser(@ModelAttribute("AccountInfoForm") User form,
 			                    RedirectAttributes model){
 		userEditService.deleteUser(form.getName());
 		return "redirect:/login";

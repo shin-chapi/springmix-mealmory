@@ -23,70 +23,51 @@ public class SignupController {
 	@Autowired
 	public UserMapper userMapper;
 
-
-	
-
-	
-	//@Autowired
 	public BCryptPasswordEncoder encoder;
 	
 
 	@Autowired
 	public UserRegisterationService userRegisterationService;
 
-	
-
-
 	/** ユーザー登録画面を表示 */
 	@GetMapping("signup")
-	public String signup(@ModelAttribute SignupForm form) {
+	public String indexSignup(@ModelAttribute SignupForm form) {
 
 		// ユーザー登録画面に遷移
 		return "signup";
 	}
 
-
 	/** ユーザー登録処理 */
 	@PostMapping("signup")
-
-	public String postsignup(@ModelAttribute @Validated SignupForm form, BindingResult bindingResult) {
+	public String userSignup(@ModelAttribute @Validated SignupForm form, BindingResult bindingResult) {
 		
 		String mail = form.getMail();
 		String name = form.getName();
 		String password = form.getPassword();
-		
+		//同じ名前は使用不可
 		if (userMapper.identifyUser(name) != null) {
             FieldError fieldError = new FieldError(bindingResult.getObjectName(), "name", "その名前はすでに使用されています。");
             bindingResult.addError(fieldError);
             return "signup";
         }
-
-
-
-		
+		//同じメールアドレス使用不可
 		if (userMapper.identifyMail(mail) != null) {
             FieldError fieldError = new FieldError(bindingResult.getObjectName(), "mail", "そのEメールはすでに使用されています。");
             bindingResult.addError(fieldError);
             return "signup";
         }
-
 		// 入力チェック結果
 		if (bindingResult.hasErrors()) {
 			// NG:ユーザー登録画面に戻ります
 			return "signup";
 		}
-
 		// ログ表示
 		Logger logger = LoggerFactory.getLogger(SignupController.class);
 		logger.info(form.toString());
 
-
 		User entity = new User(mail, name, password);
 		userRegisterationService.registerUser(entity);
-
-
-
-		// ログイン画面にリダイレクト
+        // ログイン画面にリダイレクト
 		return "redirect:/login";
 
 	}
