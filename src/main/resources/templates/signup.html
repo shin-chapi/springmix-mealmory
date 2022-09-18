@@ -12,7 +12,7 @@
           <div class="mb-3">
             <label for="name" th:text=name ></label>
             <input type="text" class="form-control" 
-              th:errorclass="is-invalid" th:field="*{name}" name="name" >
+              th:errorclass="is-invalid" th:field="*{name}" name="name"  placeholder="ユーザーID">
             <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback" th:errors="*{name}"></div>
             
             
@@ -22,7 +22,7 @@
           <div class="mb-3">
             <label for="mail" th:text=mail ></label>
             <input type="email" class="form-control" 
-              th:errorclass="is-invalid" th:field="*{mail}" name="mail" >
+              th:errorclass="is-invalid" th:field="*{mail}" name="mail"  placeholder="メールアドレス">
             <div th:if="${#fields.hasErrors('mail')}" class="invalid-feedback" th:errors="*{mail}"> </div>
             </div>
          
@@ -30,8 +30,7 @@
           <div class="mb-3">
             <label for="password" th:text=password ></label>
             <input class="form-control"  
-              th:errorclass="is-invalid" th:field="*{password}" name="password" >
-            
+              th:errorclass="is-invalid" th:field="*{password}" name="password" placeholder="パスワード" >
             <div class="invalid-feedback" th:errors="*{password}">
             </div>
           </div>
