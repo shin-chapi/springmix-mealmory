@@ -54,21 +54,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .passwordParameter("password")
             .defaultSuccessUrl("/calendar")
             .failureUrl("/login?error")
-        .and()
+            .and()
             .logout()
         	.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
             .logoutUrl("/logout")
         	.logoutSuccessUrl("/login")
         	.deleteCookies("JSESSIONID")
-        	.invalidateHttpSession(true);
+        	.invalidateHttpSession(true).permitAll();
         	
         // @formatter:on
 	}
-	/**
-	 * パスワードをBCryptでハッシュ化するクラス ハッシュ化するクラスも幾つか種類がある
-	 * 
-	 * @return パスワードをBCryptで暗号化するクラスオブジェクト
-	 */
+	
 	@Bean
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
