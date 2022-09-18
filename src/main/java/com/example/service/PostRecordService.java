@@ -28,9 +28,10 @@ public class PostRecordService {
 	public List<CalendarRecord> findAllCalendarRecords(String userName) {
 		SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd");
 
+		//ユーザーIDで投稿を検索
 		List<Post> diaryRecords = PostMapper.findAllDiaryRecords(userName);
 		List<CalendarRecord> calendarRecords = new ArrayList<CalendarRecord>();
-
+        //検索した投稿をカレンダーに表示のためデータをcalendarRecordsにデータ入れ替え
 		for (int i = 0; i < diaryRecords.size(); i++) {
 			Post diary = diaryRecords.get(i);
 			CalendarRecord calendar = new CalendarRecord();
@@ -57,15 +58,6 @@ public class PostRecordService {
 		return calendarRecords;
 	}
 
-	public String returnTitle(Post diary) {
-		if (diary.getRecord2() != null) {
-			return diary.getRecord2();
-		} else if (diary.getRecord1() != null) {
-			return diary.getRecord1();
-		} else {
-			return diary.getRecord3();
-		}
-	}
 
 	@Transactional(readOnly = false)
 	public void insertDiaryRecord(PostForm form) {

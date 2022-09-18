@@ -68,10 +68,11 @@ public class MainController {
 			return "postEdit";
 
 		}
-
+        //同じカテゴリー、日付の投稿がないか検索
 		PostForm exist = postRecordService.findOneDiaryRecord(details.getUsername(),  
 				                                              postform.getCategoryId(),
 				                                              postform.getDiaryDay());
+	    //同じ投稿あれば更新せずメッセージ追加
 		if (exist != null) {
 			model.addAttribute("lists", PostRecordCategory.values());
 			model.addAttribute("message", "既に同じカテゴリ、同じ日付で登録されています");
@@ -81,10 +82,6 @@ public class MainController {
 
 		String imageName = null;
 		LocalDateTime dateTime = LocalDateTime.now();
-		if (file == null) {
-			System.out.println("nullです");
-		}
-		
 		// ファイルが空でない場合に、ファイルの中身をチェックする
 		if (!file.getMultipartFile().isEmpty()) {
 			//ファイルバリデーション
