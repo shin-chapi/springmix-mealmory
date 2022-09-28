@@ -7,6 +7,20 @@
 		<h1>MyPage</h1>
 	</div>
 	
+	<div th:each="obj:${userinfo}">
+	<table cellpadding="6">
+	<tr>
+	        <th>name</th>
+	        <td th:text="${obj.name}"></td>
+	    </tr>
+		<tr>
+		    <th>mail</th>
+		    <td th:text="${obj.mail}"></td>
+		</tr> 
+		
+	</table>
+	</div>
+	
 	<div class="row justify-content-center">
 	<div class="col-3">
 <a class="btn w-100 btn-outline-dark" th:href="@{/calendar}">カレンダーへ戻る</a><br> <br>

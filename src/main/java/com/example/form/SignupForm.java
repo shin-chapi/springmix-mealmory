@@ -12,10 +12,25 @@ import lombok.Data;
 @Data
 public class SignupForm {
 	
+	public SignupForm() {
+		
+	}
+	
+	public SignupForm( String name,
+			String mail,
+			String password) {
+		super();
+		this.name = name;
+		this.mail = mail;
+		this.password = password;
+	}
+	
+	
+	
 	@NotBlank
 	@Length(max=255)
 	private String name;
-	
+
 	@NotBlank
 	@Email(message="emailの形式で入力してください")
 	private String mail;

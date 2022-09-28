@@ -28,6 +28,9 @@ public class AccountController {
 	@GetMapping("/mypage")
 	public String indexUserPage(@AuthenticationPrincipal User details,
 			                    Model model) {
+		SignupForm form = userEditService.findUser(details.getName());
+		model.addAttribute("userinfo",form);
+		
 		return "index";
 	}
 	//ユーザーを編集
